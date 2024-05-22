@@ -1,31 +1,165 @@
-# Docsify Template
+# Tonguard developer documentation
 
-> A simple [Docsify](https://github.com/docsifyjs/docsify/) template for creating Markdown-based documentation sites, with no build process required.
+## Setting up ongoing monitoring of TON addresses risk score via API
 
-## Site Setup
+### Purpose
 
-### Static Webserver
-Upload these template files to any static web server. The file `.nojekyll` is only required if hosting the site on GitHub Pages and otherwise can be removed.
+Ongoing monitoring feature allows Tonguard users to receive API notifications when some condition regarding specific address is met 
+(e.g. its risk score exceeded certain threshold)
 
-### GitHub Pages
+### Endpoints list
 
-#### Hosting Site
+https://api.tonguard.org/
 
-To host this template on GitHub Pages do the following:  
+### Integration
 
-1. Log into GitHub if you have not done so already
-2. Tap the **Use this template** button in the upper-right of this GitHub Repository and choose **Create a new repository**
-3. Enter a name for your new Repository and then tap the **Create repository** button
-4. Once your new Repostitory is created go to **Settings**, then select **Pages** from the left-hand sidebar, and under **Branch** choose **main** and then tap the **Save** button
-5. Wait a minute or two and refresh the same **Pages** page - once your site is ready a message will be displayed at the top of the screen along with a site link and a **Visit site** button
+To configure the monitoring follow these steps:
 
-#### Editing Content
+1. Get access token via login
 
-How about editing the content of your new Docsify site on GitHub Pages? View the Markdown page you want to edit (for example, **README.md**) and tap the **Pencil Icon**, then save any changes by tapping the green **Commit changes...** button. In just a few moments the Docsify site will be automatically updated to reflect those changes.
+```
+POST /v1/auth/login
+{
+  "username": "johnsmith@tonguard.org",
+  "password": "ToNloveR2000"
+}
+```
 
-### Viewing Locally 
-Run `npx serve .` (Node.js users) or `python -m http.server 8000` (Python users) in the repo folder to serve run locally.
+2. Using access token add desired URL to receive notifications via
 
-## Docsify Documentation
+```
+POST /v1/monitoring/notify_setting?notify_url=https://your_site.com
+```
 
-To learn more about using Docsify, visit https://docsify.js.org.
+3. Using access token get the list of your available notify settings
+
+```
+GET /v1/monitoring/notify_setting
+```
+
+You will receive the list like this
+
+```
+{
+  "count": 2,
+  "notify_settings": [
+    {
+      "id": 1,
+      "notify_url": "https://example.com/v1/receive/1",
+      "created_dt": "2024-05-22T09:46:44.426269+00:00"
+    },
+    {
+      "id": 2,
+      "notify_url": "https://example.com/v1/receive/2",
+      "created_dt": "2024-05-22T09:46:44.838765+00:00"
+    }
+  ]
+}
+```
+
+Remember the `id` of the notify_url you want to use
+
+4. Using access token create your monitoring rule. For key `monitoring_notify_setting_id` use id received in 3.
+Yet only risk score value is available as base rule, so specify key `monitoring_rule_info_id` to be `1`.
+`rule_name_custom` and `comment` are optional and can be skipped (not added to json body)
+
+```
+POST /v1/monitoring/user_rule
+{
+  "monitoring_notify_setting_id": 1,
+  "monitoring_rule_info_id": 1,
+  "custom_parameter": {},
+  "rule_name_custom": "Your custom name",
+  "comment": "Your comment"
+}
+```
+
+Default trigger risk score value is `80`. If you want to have it different, specify `custom_parameter` from 0 to 100 like so
+
+```"custom_parameter": {"risk_threshold": 100}```
+
+Note that you can add several rules with same notify url, but different parameters - or vice versa.
+
+5. Using access token get the list of your available rules
+
+```
+GET /v1/monitoring/user_rule
+```
+
+You will receive the list like this
+
+```
+{
+  "count": 2,
+  "user_rules": [
+    {
+      "id": 1,
+      "monitoring_notify_setting_id": 3,
+      "monitoring_rule_info_id": 1,
+      "custom_parameter": null,
+      "rule_name": "Risk threshold",
+      "comment": null,
+      "created_dt": "2024-05-22T09:46:45.099177+00:00"
+    },
+    {
+      "id": 2,
+      "monitoring_notify_setting_id": 4,
+      "monitoring_rule_info_id": 1,
+      "custom_parameter": {
+        "risk_threshold": 99
+      },
+      "rule_name": "Risk threshold = 99",
+      "comment": "Random comment",
+      "created_dt": "2024-05-22T09:46:45.309196+00:00"
+    },
+  ]
+}
+```
+
+Remember the `id` of the rule you want to use
+
+6. Finally, add desired address under monitoring. Yet you can add only 1 address per request. 
+Using access token trigger the endpoint below. You can pass `address` in EQ or UQ format. 
+`comment` is optional and can be skipped. For `monitoring_user_rule_id` use id received in 5.
+
+```
+POST /v1/monitoring/address_under_rule
+{
+  "monitoring_user_rule_id": 1,
+  "address": "UQB879Q7IRXY-uLWBX9FomGCR0uxmyNjqqNgeqWYdk1Yx9d6",
+  "comment": "string"
+}
+```
+
+7. You can see the list of your monitored addresses via the endpoint below. 
+It also allows for filtration using parameters `address, date_from, date_to, user_rules`
+
+```
+GET /v1/monitoring/address_under_rule
+```
+
+You will receive the list like this
+
+```
+{
+  "count": 1,
+  "addresses": [
+    {
+      "created_dt": "2024-05-22T12:35:11.058433+00:00",
+      "monitoring_user_rule_name": "Risk threshold",
+      "monitoring_address_under_rule_id": 1,
+      "address": "UQB879Q7IRXY-uLWBX9FomGCR0uxmyNjqqNgeqWYdk1Yx9d6"
+    }
+  ]
+}
+```
+
+8. You may want to exclude some address from monitoring. 
+To do so, trigger the following endpoint passing `monitoring_address_under_rule_id` from 7.
+
+```
+DELETE /v1/monitoring/address_under_rule
+{
+  "monitoring_address_under_rule_id": 1
+}
+```
