@@ -1,4 +1,4 @@
-# TON Guard
+# API
 
 > Version 1.1.2
 
@@ -112,10 +112,8 @@ This API uses HTTP status codes to communicate with the API consumer.
 | UserRules | [#/components/schemas/UserRules](#componentsschemasuserrules) |  |
 | ValidationError | [#/components/schemas/ValidationError](#componentsschemasvalidationerror) |  |
 | WalletInfo | [#/components/schemas/WalletInfo](#componentsschemaswalletinfo) |  |
-| ton_aml__platform__api__v1__aml__reports__serializers__WalletRiskScore | [#/components/schemas/ton_aml__platform__api__v1__aml__reports__serializers__WalletRiskScore](#componentsschemaston_aml__platform__api__v1__aml__reports__serializers__walletriskscore) |  |
-| ton_aml__platform__core__command__scoring__data_models__WalletRiskScore | [#/components/schemas/ton_aml__platform__core__command__scoring__data_models__WalletRiskScore](#componentsschemaston_aml__platform__core__command__scoring__data_models__walletriskscore) |  |
-| ton_aml__platform__core__command__scoring__data_models__WalletTag | [#/components/schemas/ton_aml__platform__core__command__scoring__data_models__WalletTag](#componentsschemaston_aml__platform__core__command__scoring__data_models__wallettag) |  |
-| ton_aml__platform__core__repository__postgre_connector__data_models__WalletTag | [#/components/schemas/ton_aml__platform__core__repository__postgre_connector__data_models__WalletTag](#componentsschemaston_aml__platform__core__repository__postgre_connector__data_models__wallettag) |  |
+| WalletRiskScore | [#/components/schemas/WalletRiskScore](#componentsschemaswalletriskscore) |  |
+| WalletTag | [#/components/schemas/WalletTag](#componentsschemaswallettag) |  |
 
 ## Path Details
 
@@ -1624,43 +1622,7 @@ Returns next structure:
 }
 ```
 
-### #/components/schemas/ton_aml__platform__api__v1__aml__reports__serializers__WalletRiskScore
-
-```ts
-{
-  version: string
-  address: string
-  address_raw?: string //default: unknown
-  address_non_bounceable?: string //default: unknown
-  address_type?: string //default: unknown
-  risk_score?: integer
-  fraud_level?: enum[high, medium, low, lowest, unknown] //default: lowest
-  risk_category?: string[]
-  total_days?: integer
-  first_transaction_time?: string
-  last_transaction_time?: string
-  total_balance?: number
-  total_transactions_amount?: number
-  total_transactions_count?: integer
-  total_counterparts_count?: integer
-  total_sent_transactions_amount?: number
-  total_sent_transactions_count?: integer
-  total_sent_counterparts_count?: integer
-  total_received_transactions_amount?: number
-  total_received_transactions_count?: integer
-  total_received_counterparts_count?: integer
-  gambling_message_count?: integer
-  spam_message_count?: integer
-  scam_message_count?: integer
-  bridge_wallet_status?: string[]
-  exchange_wallet_status?: string[]
-  stacking_wallet_status?: string[]
-  miner_wallet_status?: string[]
-  nft_wallet_status?: string[]
-}
-```
-
-### #/components/schemas/ton_aml__platform__core__command__scoring__data_models__WalletRiskScore
+### #/components/schemas/WalletRiskScore
 
 ```ts
 {
@@ -1677,7 +1639,12 @@ Returns next structure:
     type: string
     description: string
   }[]
-  info_category:#/components/schemas/ton_aml__platform__core__command__scoring__data_models__WalletTag[]
+  info_category: {
+    code: integer
+    name: string
+    type: string
+    description: string
+  }[]
   risky_connections: {
     last_transaction_time?: string
     wallet_address?: string
@@ -1719,18 +1686,7 @@ Returns next structure:
 }
 ```
 
-### #/components/schemas/ton_aml__platform__core__command__scoring__data_models__WalletTag
-
-```ts
-{
-  code: integer
-  name: string
-  type: string
-  description: string
-}
-```
-
-### #/components/schemas/ton_aml__platform__core__repository__postgre_connector__data_models__WalletTag
+### #/components/schemas/WalletTag
 
 ```ts
 {

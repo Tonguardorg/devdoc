@@ -1,2 +1,2 @@
-- [Read Me](README)
-- [Example Second Page](second-page)
+- [API descripton](tonguard-api)
+- [Ongoing monitoring](ongoing-monitoring)
