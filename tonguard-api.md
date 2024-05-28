@@ -6,7 +6,7 @@ Provides risk score and risk level estimation for TON blockchain addresses and e
 
 ##  Authentication
 
-First you retrieve a new JWT token using login/password authentication. After that you can use it to access other resources.
+First, you retrieve a new JWT token using login/password authentication. After that, you can use it to access other resources.
 
 **JWT token example**
 
@@ -35,7 +35,7 @@ First you retrieve a new JWT token using login/password authentication. After th
 }
 ```
 
-The URL examples throughout this documentation use token as a placeholder. For these examples to work, you **need** to substitute the value with your **own** access token.
+The URL examples throughout this documentation use a token as a placeholder. For these examples to work, you **need** to substitute the value with your **own** access token.
 
 ## Status codes
 
@@ -49,15 +49,15 @@ This API uses HTTP status codes to communicate with the API consumer.
 
 `401 Unauthorized` - When no or invalid authentication details are provided.
 
-`403 Forbidden` - When authentication succeeded but authenticated user doesn't have access to the resource.
+`403 Forbidden` - When authentication succeeded but the authenticated user doesn't have access to the resource.
 
-`428 Requests Limit Reached` - When user reached his predefined maximum amount of requests
+`428 Requests Limit Reached` - When the user reaches his predefined maximum amount of requests
 
-`429 Rate Limit Exceeded` - When calls to certain endpoint for user are higher than predefined limits
+`429 Rate Limit Exceeded` - When calls to a certain endpoint for the user are higher than predefined limits
 
 `500 Server Error` - Something went wrong on the API end.
 
-`501 Not Implemented` - The server either does not recognize the request method, or it lacks the ability to fulfill the request.
+`501 Not Implemented` - The server either does not recognize the request method, or it cannot fulfil the request.
 
 # List of available endpoints
 
@@ -66,22 +66,22 @@ This API uses HTTP status codes to communicate with the API consumer.
 
 | Method | Path | Description |
 | --- | --- | --- |
-| GET | [/v1/reports/wallet_risk_score](#getv1reportswallet_risk_score) | Returns address risk score, risk level and query related info. Each query exceeds remaining number of queries for the user. |
-| GET | [/v1/reports/risk_scoring_history](#getv1reportsrisk_scoring_history) | Returns risk scoring history for a specific user and address. |
+| GET | [/v1/reports/wallet_risk_score](#getv1reportswallet_risk_score) | Returns address risk score, risk level and query related info. Each query exceeds the remaining number of queries for the user. |
+| GET | [/v1/reports/risk_scoring_history](#getv1reportsrisk_scoring_history) | Returns risk-scoring history for a specific user and address. |
 | GET | [/v1/reports/risk_scoring_report](#getv1reportsrisk_scoring_report) | Return risk scoring report for a specific uuid. |
 | POST | [/v1/claims/report_wallets](#postv1claimsreport_wallets) | Create Wallet Claim |
 | GET | [/v1/claims/my](#getv1claimsmy) | Get Claims |
 | DELETE | [/v1/claims/delete](#deletev1claimsdelete) | Delete Claims |
 | GET | [/v1/service/download/{data_name}.csv](#getv1servicedownloaddata_namecsv) | Download data as a file. |
 | GET | [/v1/monitoring/wallet_list](#getv1monitoringwallet_list) | Get user monitoring wallets |
-| GET | [/v1/monitoring/notify_setting](#getv1monitoringnotify_setting) | Get user notification urls |
+| GET | [/v1/monitoring/notify_setting](#getv1monitoringnotify_setting) | Get user notification URLs |
 | POST | [/v1/monitoring/notify_setting](#postv1monitoringnotify_setting) | Add user notification url |
 | GET | [/v1/monitoring/user_rule](#getv1monitoringuser_rule) | Get user rules |
 | POST | [/v1/monitoring/user_rule](#postv1monitoringuser_rule) | Add user rule |
 | GET | [/v1/monitoring/address_under_rule](#getv1monitoringaddress_under_rule) | Get addresses under monitoring |
 | POST | [/v1/monitoring/address_under_rule](#postv1monitoringaddress_under_rule) | Attach a user rule to a wallet |
 | DELETE | [/v1/monitoring/address_under_rule](#deletev1monitoringaddress_under_rule) | Delete address from monitoring |
-| POST | [/v1/auth/login](#postv1authlogin) | User authentication. Does not exceed remaining number of queries for the user |
+| POST | [/v1/auth/login](#postv1authlogin) | User authentication. Does not exceed the remaining number of queries for the user |
 
 ## Reference Table
 
