@@ -2,8 +2,8 @@
 
 ## Purpose
 
-Ongoing monitoring feature allows Tonguard users to receive API notifications when some condition regarding specific address is met 
-(e.g. its risk score exceeded certain threshold)
+The ongoing monitoring feature allows Tonguard users to receive API notifications when some condition regarding a specific address is met 
+(e.g. its risk score exceeded a certain threshold)
 
 ## Endpoints list
 
@@ -23,13 +23,13 @@ POST /v1/auth/login
 }
 ```
 
-2. Using access token add desired URL to receive notifications via
+2. Using the access token add the desired URL to receive notifications via
 
 ```
 POST /v1/monitoring/notify_setting?notify_url=https://your_site.com
 ```
 
-3. Using access token get the list of your available notify settings
+3. Using the access token get the list of your available notification settings
 
 ```
 GET /v1/monitoring/notify_setting
@@ -57,9 +57,9 @@ You will receive the list like this
 
 Remember the `id` of the notify_url you want to use
 
-4. Using access token create your monitoring rule. For key `monitoring_notify_setting_id` use id received in 3.
-Yet only risk score value is available as base rule, so specify key `monitoring_rule_info_id` to be `1`.
-`rule_name_custom` and `comment` are optional and can be skipped (not added to json body)
+4. Using the access token create your monitoring rule. For key `monitoring_notify_setting_id` use the id received in 3.
+Yet only risk score value is available as a base rule, so specify key `monitoring_rule_info_id` to be `1`.
+`rule_name_custom` and `comment` are optional and can be skipped (not added to JSON body)
 
 ```
 POST /v1/monitoring/user_rule
@@ -72,13 +72,13 @@ POST /v1/monitoring/user_rule
 }
 ```
 
-Default trigger risk score value is `80`. If you want to have it different, specify `custom_parameter` from 0 to 100 like so
+The default trigger risk score value is `80`. If you want to have it different, specify `custom_parameter` from 0 to 100 like so
 
 ```"custom_parameter": {"risk_threshold": 100}```
 
-Note that you can add several rules with same notify url, but different parameters - or vice versa.
+Note that you can add several rules with the same notify URL, but different parameters - or vice versa.
 
-5. Using access token get the list of your available rules
+5. Using the access token get the list of your available rules
 
 ```
 GET /v1/monitoring/user_rule
@@ -116,9 +116,9 @@ You will receive the list like this
 
 Remember the `id` of the rule you want to use
 
-6. Finally, add desired address under monitoring. Yet you can add only 1 address per request. 
-Using access token trigger the endpoint below. You can pass `address` in EQ or UQ format. 
-`comment` is optional and can be skipped. For `monitoring_user_rule_id` use id received in 5.
+6. Finally, add the desired address under monitoring. Yet you can add only 1 address per request. 
+Using the access token triggers the endpoint below. You can pass `address` in EQ or UQ format. 
+`comment` is optional and can be skipped. For `monitoring_user_rule_id` use the id received in 5.
 
 ```
 POST /v1/monitoring/address_under_rule
