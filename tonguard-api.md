@@ -4,6 +4,10 @@
 
 Provides risk score and risk level estimation for TON blockchain addresses and etc  🚀
 
+## Endpoints list
+
+https://api.tonguard.org/
+
 ##  Authentication
 
 First, you retrieve a new JWT token using login/password authentication. After that, you can use it to access other resources.
