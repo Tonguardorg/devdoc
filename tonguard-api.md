@@ -47,6 +47,8 @@ This API uses HTTP status codes to communicate with the API consumer.
 
 `200 OK` - Response to a successful GET, PUT, PATCH or DELETE.
 
+`204` ???
+
 `201 Created` - Response to a POST that results in a creation.
 
 `400 Bad Request` - Malformed request; request body validation errors.
@@ -65,6 +67,10 @@ This API uses HTTP status codes to communicate with the API consumer.
 
 # List of available endpoints
 
+## Auth
+| Method | Path | Description |
+| --- | --- | --- |
+| POST | [/v1/auth/login](#postv1authlogin) | User authentication. Does not exceed the remaining number of queries for the user |
 
 ## Path Table
 
@@ -1159,26 +1165,26 @@ Returns next structure:
 
 #### RequestBody
 
-- application/json
+`application/json`
 
 ```ts
 {
   // E-mail address of user.
   username: string
-  password?: string //default: ToNloveR2000
+  password: string //default: ToNloveR2000
 }
 ```
 
 #### Responses
 
-- 200 Returns JWT token related info and and remaining number of queries
+- 200 Returns JWT token related info and remaining number of queries
 
 `application/json`
 
 ```ts
 {
-  token?: string
-  token_type?: string //default: JWT
+  token: string
+  token_type: string //default: JWT
   expiry: string
   queries_count_left: integer
 }
@@ -1202,7 +1208,7 @@ Returns next structure:
 ```ts
 {
   detail: {
-    loc?: Partial(string) & Partial(integer)[]
+    loc: Partial(string) & Partial(integer)[]
     msg: string
     type: string
   }[]
@@ -1262,7 +1268,7 @@ Returns next structure:
 {
   // E-mail address of user.
   username: string
-  password?: string //default: ToNloveR2000
+  password: string //default: ToNloveR2000
 }
 ```
 
@@ -1293,7 +1299,7 @@ Returns next structure:
 {
   monitoring_user_rule_id: integer
   address: string
-  comment?: string
+  comment: string
 }
 ```
 
@@ -1305,8 +1311,8 @@ Returns next structure:
   monitoring_rule_info_id: integer
   custom_parameter: {
   }
-  rule_name_custom?: string
-  comment?: string
+  rule_name_custom: string
+  comment: string
 }
 ```
 
@@ -1323,7 +1329,8 @@ Returns next structure:
 ```ts
 {
   detail: {
-    loc?: Partial(string) & Partial(integer)[]
+    loc
+            : Partial(string) & Partial(integer)[]
     msg: string
     type: string
   }[]
@@ -1379,38 +1386,38 @@ Returns next structure:
   history: {
     version: string
     uuid: string
-    created_dt?: string
+    created_dt: string
     address: string
-    address_type?: string //default: unknown
-    address_raw?: string
-    address_non_bounceable?: string
-    fraud_level?: string
-    risk_score?: integer
-    info_category?: integer[]
-    risk_category?: integer[]
+    address_type: string //default: unknown
+    address_raw: string
+    address_non_bounceable: string
+    fraud_level: string
+    risk_score: integer
+    info_category: integer[]
+    risk_category: integer[]
     risky_connections: {
     }[]
-    first_transaction_time?: string
-    last_transaction_time?: string
-    total_balance?: number
-    total_days?: number
-    total_transactions_amount?: number
-    total_sent_transactions_amount?: number
-    total_received_transactions_amount?: number
-    total_counterparts_count?: integer
-    total_sent_counterparts_count?: integer
-    total_received_counterparts_count?: integer
-    total_transactions_count?: integer
-    total_sent_transactions_count?: integer
-    total_received_transactions_count?: integer
-    bridge_wallet_status?: string[]
-    exchange_wallet_status?: string[]
-    stacking_wallet_status?: string[]
-    miner_wallet_status?: string[]
-    nft_wallet_status?: string[]
-    gambling_message_count?: integer
-    spam_message_count?: integer
-    scam_message_count?: integer
+    first_transaction_time: string
+    last_transaction_time: string
+    total_balance: number
+    total_days: number
+    total_transactions_amount: number
+    total_sent_transactions_amount: number
+    total_received_transactions_amount: number
+    total_counterparts_count: integer
+    total_sent_counterparts_count: integer
+    total_received_counterparts_count: integer
+    total_transactions_count: integer
+    total_sent_transactions_count: integer
+    total_received_transactions_count: integer
+    bridge_wallet_status: string[]
+    exchange_wallet_status: string[]
+    stacking_wallet_status: string[]
+    miner_wallet_status: string[]
+    nft_wallet_status: string[]
+    gambling_message_count: integer
+    spam_message_count: integer
+    scam_message_count: integer
   }[]
   count: integer
 }
@@ -1422,38 +1429,38 @@ Returns next structure:
 {
   version: string
   uuid: string
-  created_dt?: string
+  created_dt: string
   address: string
-  address_type?: string //default: unknown
-  address_raw?: string
-  address_non_bounceable?: string
-  fraud_level?: string
-  risk_score?: integer
-  info_category?: integer[]
-  risk_category?: integer[]
+  address_type: string //default: unknown
+  address_raw: string
+  address_non_bounceable: string
+  fraud_level: string
+  risk_score: integer
+  info_category: integer[]
+  risk_category: integer[]
   risky_connections: {
   }[]
-  first_transaction_time?: string
-  last_transaction_time?: string
-  total_balance?: number
-  total_days?: number
-  total_transactions_amount?: number
-  total_sent_transactions_amount?: number
-  total_received_transactions_amount?: number
-  total_counterparts_count?: integer
-  total_sent_counterparts_count?: integer
-  total_received_counterparts_count?: integer
-  total_transactions_count?: integer
-  total_sent_transactions_count?: integer
-  total_received_transactions_count?: integer
-  bridge_wallet_status?: string[]
-  exchange_wallet_status?: string[]
-  stacking_wallet_status?: string[]
-  miner_wallet_status?: string[]
-  nft_wallet_status?: string[]
-  gambling_message_count?: integer
-  spam_message_count?: integer
-  scam_message_count?: integer
+  first_transaction_time: string
+  last_transaction_time: string
+  total_balance: number
+  total_days: number
+  total_transactions_amount: number
+  total_sent_transactions_amount: number
+  total_received_transactions_amount: number
+  total_counterparts_count: integer
+  total_sent_counterparts_count: integer
+  total_received_counterparts_count: integer
+  total_transactions_count: integer
+  total_sent_transactions_count: integer
+  total_received_transactions_count: integer
+  bridge_wallet_status: string[]
+  exchange_wallet_status: string[]
+  stacking_wallet_status: string[]
+  miner_wallet_status: string[]
+  nft_wallet_status: string[]
+  gambling_message_count: integer
+  spam_message_count: integer
+  scam_message_count: integer
 }
 ```
 
@@ -1464,38 +1471,38 @@ Returns next structure:
   report: {
     version: string
     uuid: string
-    created_dt?: string
+    created_dt: string
     address: string
-    address_type?: string //default: unknown
-    address_raw?: string
-    address_non_bounceable?: string
-    fraud_level?: string
-    risk_score?: integer
-    info_category?: integer[]
-    risk_category?: integer[]
+    address_type: string //default: unknown
+    address_raw: string
+    address_non_bounceable: string
+    fraud_level: string
+    risk_score: integer
+    info_category: integer[]
+    risk_category: integer[]
     risky_connections: {
     }[]
-    first_transaction_time?: string
-    last_transaction_time?: string
-    total_balance?: number
-    total_days?: number
-    total_transactions_amount?: number
-    total_sent_transactions_amount?: number
-    total_received_transactions_amount?: number
-    total_counterparts_count?: integer
-    total_sent_counterparts_count?: integer
-    total_received_counterparts_count?: integer
-    total_transactions_count?: integer
-    total_sent_transactions_count?: integer
-    total_received_transactions_count?: integer
-    bridge_wallet_status?: string[]
-    exchange_wallet_status?: string[]
-    stacking_wallet_status?: string[]
-    miner_wallet_status?: string[]
-    nft_wallet_status?: string[]
-    gambling_message_count?: integer
-    spam_message_count?: integer
-    scam_message_count?: integer
+    first_transaction_time: string
+    last_transaction_time: string
+    total_balance: number
+    total_days: number
+    total_transactions_amount: number
+    total_sent_transactions_amount: number
+    total_received_transactions_amount: number
+    total_counterparts_count: integer
+    total_sent_counterparts_count: integer
+    total_received_counterparts_count: integer
+    total_transactions_count: integer
+    total_sent_transactions_count: integer
+    total_received_transactions_count: integer
+    bridge_wallet_status: string[]
+    exchange_wallet_status: string[]
+    stacking_wallet_status: string[]
+    miner_wallet_status: string[]
+    nft_wallet_status: string[]
+    gambling_message_count: integer
+    spam_message_count: integer
+    scam_message_count: integer
   }
 }
 ```
@@ -1504,15 +1511,15 @@ Returns next structure:
 
 ```ts
 {
-  last_transaction_time?: string
-  wallet_address?: string
-  neighbor_wallet_address?: string
-  total_income?: integer
-  total_outcome?: integer
-  risk_score?: integer
-  fraud_level?: string
-  total_transactions_count?: integer
-  total_transactions_amount?: string
+  last_transaction_time: string
+  wallet_address: string
+  neighbor_wallet_address: string
+  total_income: integer
+  total_outcome: integer
+  risk_score: integer
+  fraud_level: string
+  total_transactions_count: integer
+  total_transactions_amount: string
   tags: {
     code: integer
     name: string
@@ -1526,8 +1533,8 @@ Returns next structure:
 
 ```ts
 {
-  token?: string
-  token_type?: string //default: JWT
+  token: string
+  token_type: string //default: JWT
   expiry: string
   queries_count_left: integer
 }
@@ -1540,8 +1547,8 @@ Returns next structure:
   uuid: string
   address: string
   created_dt: string
-  transaction_link?: string
-  comment?: string
+  transaction_link: string
+  comment: string
   tags: Partial({
      code: integer
      name: string
@@ -1560,8 +1567,8 @@ Returns next structure:
     uuid: string
     address: string
     created_dt: string
-    transaction_link?: string
-    comment?: string
+    transaction_link: string
+    comment: string
     tags: Partial({
        code: integer
        name: string
@@ -1581,9 +1588,9 @@ Returns next structure:
   monitoring_rule_info_id: integer
   custom_parameter: {
   }
-  rule_name?: string
-  comment?: string
-  created_dt?: string
+  rule_name: string
+  comment: string
+  created_dt: string
 }
 ```
 
@@ -1598,9 +1605,9 @@ Returns next structure:
     monitoring_rule_info_id: integer
     custom_parameter: {
     }
-    rule_name?: string
-    comment?: string
-    created_dt?: string
+    rule_name: string
+    comment: string
+    created_dt: string
   }[]
 }
 ```
@@ -1609,7 +1616,7 @@ Returns next structure:
 
 ```ts
 {
-  loc?: Partial(string) & Partial(integer)[]
+  loc: Partial(string) & Partial(integer)[]
   msg: string
   type: string
 }
@@ -1620,9 +1627,9 @@ Returns next structure:
 ```ts
 {
   wallet_address: string
-  tags?: integer[]
-  comment?: string
-  transaction_link?: string
+  tags: integer[]
+  comment: string
+  transaction_link: string
 }
 ```
 
@@ -1632,11 +1639,11 @@ Returns next structure:
 {
   version: string
   address: string
-  address_type?: string //default: unknown
-  address_raw?: string //default: unknown
-  address_non_bounceable?: string //default: unknown
-  fraud_level?: string
-  risk_score?: integer
+  address_type: string //default: unknown
+  address_raw: string //default: unknown
+  address_non_bounceable: string //default: unknown
+  fraud_level: string
+  risk_score: integer
   risk_category: {
     code: integer
     name: string
@@ -1650,15 +1657,15 @@ Returns next structure:
     description: string
   }[]
   risky_connections: {
-    last_transaction_time?: string
-    wallet_address?: string
-    neighbor_wallet_address?: string
-    total_income?: integer
-    total_outcome?: integer
-    risk_score?: integer
-    fraud_level?: string
-    total_transactions_count?: integer
-    total_transactions_amount?: string
+    last_transaction_time: string
+    wallet_address: string
+    neighbor_wallet_address: string
+    total_income: integer
+    total_outcome: integer
+    risk_score: integer
+    fraud_level: string
+    total_transactions_count: integer
+    total_transactions_amount: string
     tags: {
       code: integer
       name: string
@@ -1666,27 +1673,27 @@ Returns next structure:
       description: string
     }[]
   }[]
-  total_days?: integer
-  first_transaction_time?: string
-  last_transaction_time?: string
-  total_balance?: number
-  total_transactions_amount?: number
-  total_transactions_count?: integer
-  total_counterparts_count?: integer
-  total_sent_transactions_amount?: number
-  total_sent_transactions_count?: number
-  total_sent_counterparts_count?: number
-  total_received_transactions_amount?: number
-  total_received_transactions_count?: number
-  total_received_counterparts_count?: number
-  gambling_message_count?: integer
-  spam_message_count?: integer
-  scam_message_count?: integer
-  nft_wallet_status?: string[]
-  miner_wallet_status?: string[]
-  bridge_wallet_status?: string[]
-  exchange_wallet_status?: string[]
-  stacking_wallet_status?: string[]
+  total_days: integer
+  first_transaction_time: string
+  last_transaction_time: string
+  total_balance: number
+  total_transactions_amount: number
+  total_transactions_count: integer
+  total_counterparts_count: integer
+  total_sent_transactions_amount: number
+  total_sent_transactions_count: number
+  total_sent_counterparts_count: number
+  total_received_transactions_amount: number
+  total_received_transactions_count: number
+  total_received_counterparts_count: number
+  gambling_message_count: integer
+  spam_message_count: integer
+  scam_message_count: integer
+  nft_wallet_status: string[]
+  miner_wallet_status: string[]
+  bridge_wallet_status: string[]
+  exchange_wallet_status: string[]
+  stacking_wallet_status: string[]
 }
 ```
 
@@ -1700,3 +1707,4 @@ Returns next structure:
   description: string
 }
 ```
+
