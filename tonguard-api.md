@@ -1167,7 +1167,7 @@ Returns next structure:
 
 ```ts
 {
-  // E-mail address of user.
+  // Username is E-mail address of user
   username: string
   password: string //default: ToNloveR2000
 }
@@ -1205,11 +1205,16 @@ Returns next structure:
 
 ```ts
 {
-  detail: {
-    loc: Partial(string) & Partial(integer)[]
-    msg: string
-    type: string
-  }[]
+  "detail": [
+    {
+      "loc": [
+        "string",
+        integer
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
 }
 ```
 
@@ -1219,8 +1224,8 @@ Returns next structure:
 
 ```ts
 {
-  code: integer
-  detail: string
+  "code": integer,
+  "detail": "string"
 }
 ```
 
