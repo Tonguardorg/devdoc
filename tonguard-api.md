@@ -47,8 +47,6 @@ This API uses HTTP status codes to communicate with the API consumer.
 
 `200 OK` - Response to a successful GET, PUT, PATCH or DELETE.
 
-`204` ???
-
 `201 Created` - Response to a POST that results in a creation.
 
 `400 Bad Request` - Malformed request; request body validation errors.
