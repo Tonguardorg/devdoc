@@ -8,40 +8,6 @@ Provides risk score and risk level estimation for TON blockchain addresses and e
 
 https://api.tonguard.org/
 
-
-##  Authentication
-
-First you retrieve a new JWT token using login/password authentication. After that you can use it to access other resources.
-
-**JWT token example**
-
-`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWNjZXNzX3Rva2VuIiwiZXhwIjoxNjY3ODEwMjI4LCJpYXQiOjE2Njc4MDY2MjgsInN1YiI6IjIiLCJzY29wZXMiOlsiMiJdfQ.dbPU2vVx48bZejzElrfQS-Pa5B5CmzhL2F19X0l4EAA`
-
-**Decoded header**:
-
-```
-{
-  "alg": "HS256",
-  "typ": "JWT"
-}
-```
-
-**Decoded payload**:
-
-```
-{
-  "type": "access_token",
-  "exp": 1667810228,
-  "iat": 1667806628,
-  "sub": "2",
-  "scopes": [
-    "2"
-  ]
-}
-```
-
-The URL examples throughout this documentation use token as a placeholder. For these examples to work, you **need** to substitute the value with your **own** access token.
-
 ## Status codes
 
 This API uses HTTP status codes to communicate with the API consumer.
@@ -98,7 +64,6 @@ This API uses HTTP status codes to communicate with the API consumer.
 | POST | [/v1/whitelists/whitelist.csv](#postv1whitelistswhitelistcsv) | Upload whitelist data |
 | GET | [/v1/users/me](#getv1usersme) | Get user info |
 | GET | [/v1/top_holders/top_usdt_holders](#getv1top_holderstop_usdt_holders) | Returns a list of 100 top USDT holders. |
-| POST | [/v1/auth/login](#postv1authlogin) | User authentication. Does not exceed remaining number of queries for the user |
 | GET | [/v2/reports/wallet_risk_score](#getv2reportswallet_risk_score) | Returns address risk score, risk level and query related info,including the usdt information.Each query exceeds remaining number of queries for the user. |
 
 ## Reference Table
@@ -152,9 +117,11 @@ This API uses HTTP status codes to communicate with the API consumer.
 | ton_aml__platform__core__command__scoring__data_models__WalletTag | [#/components/schemas/ton_aml__platform__core__command__scoring__data_models__WalletTag](#componentsschemaston_aml__platform__core__command__scoring__data_models__wallettag) |  |
 | ton_aml__platform__core__repository__postgre_connector__data_models__WalletTag | [#/components/schemas/ton_aml__platform__core__repository__postgre_connector__data_models__WalletTag](#componentsschemaston_aml__platform__core__repository__postgre_connector__data_models__wallettag) |  |
 
-## Path Details
-
 ***
+
+
+
+
 
 ### [GET]/v1/reports/wallet_risk_score
 
@@ -2038,83 +2005,6 @@ token: string
 
 ***
 
-### [POST]/v1/auth/login
-
-- Summary  
-User authentication. Does not exceed remaining number of queries for the user
-
-- Description  
-Get the JWT for a user with data from request form body.  
-Returns next structure:  
-   - **token**: string  
-   - **token_type**: "JWT"  
-   - **expiry**: string, token expiry time in '%d/%m/%Y, %H:%M:%S GMT' format  
-   - **queries_count_left**: int, the remaining number of queries for the user
-
-#### RequestBody
-
-- application/json
-
-```ts
-{
-  // E-mail address of user.
-  username: string
-  password: string //default: ToNloveR2000
-}
-```
-
-#### Responses
-
-- 200 Returns JWT token related info and and remaining number of queries
-
-`application/json`
-
-```ts
-{
-  token: string
-  token_type: string //default: JWT
-  expiry: string
-  queries_count_left: integer
-}
-```
-
-- 401 Unauthorized
-
-`application/json`
-
-```ts
-{
-  code: integer
-  detail: string
-}
-```
-
-- 422 Validation Error
-
-`application/json`
-
-```ts
-{
-  detail: {
-    loc: Partial(string) & Partial(integer)[]
-    msg: string
-    type: string
-  }[]
-}
-```
-
-- 429 Too Many Requests
-
-`application/json`
-
-```ts
-{
-  code: integer
-  detail: string
-}
-```
-
-***
 
 ### [GET]/v2/reports/wallet_risk_score
 

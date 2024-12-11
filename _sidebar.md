@@ -1,2 +1,3 @@
+- [Authentication](authentication)
 - [API descripton](tonguard-api)
 - [Ongoing monitoring](ongoing-monitoring)
