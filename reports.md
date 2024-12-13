@@ -3,6 +3,14 @@
 Returns address risk score, risk level and query related info,including the usdt information. Each query exceeds remaining number of queries for the user.
 
 ### [GET]/v2/reports/wallet_risk_score
+**Risk score, risk level and query related info**
+
+```
+HTTP request header provide  with `token` in the following format:
+token: "Bearer <jwt token>"
+
+https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=EQCzFTXpNNsFu8IgJnRnkDyBCL2ry8KgZYiDi3Jt31ie8EIQ
+```
 
 **Content-Type** `application/json`
 
@@ -13,61 +21,50 @@ Returns address risk score, risk level and query related info,including the usdt
 | `address` | string | TON wallet address in any base64 form (urlsafe or not) | yes                  |
 | `source`  | string | source of the request<br/>api, manual                  | no <br/>default: api |
 
-**Headers**
-```
-// JWT token of authorised user
-token: string
-```
-
-```
-https://api-amlplatform-1733986985.dev-rtbst.com/v1/reports/wallet_risk_score?source=api&address=EQCzFTXpNNsFu8IgJnRnkDyBCL2ry8KgZYiDi3Jt31ie8EIQ
-```
 
 **Responses**
 
-`200` **Risk score, risk level and query related info**
-
-| Parameter                                   | Type                                     | Description                   | 
-|---------------------------------------------|------------------------------------------|-------------------------------|
-| `uuid`                                      | string                                   | universally unique identifier |
-| `version`                                   | string                                   | api's version                 |
-| `whitelist`                                 | boolean                                  |                               |
-| `blacklist`                                 | boolean                                  |                               |
-| `address`                                   | string                                   | TON wallet address            |
-| `address_raw`                               | string                                   | default: unknown              |
-| `address_non_bounceable`                    | string                                   | default: unknown              |
-| `address_type`                              | string                                   | default: unknown              |
-| `owner`                                     | string                                   | default: unknown              |
-| `risk_score`                                | integer                                  |                               |
-| `fraud_level`                               | enum[high, medium, low, lowest, unknown] | default: lowest               |                    
-| `risk_category`                             | string[]                                 |                               |
-| `total_days`                                | integer                                  |                               |
-| `first_transaction_time`                    | string                                   |                               |
-| `last_transaction_time`                     | string                                   |                               |
-| `total_balance`                             | number                                   |                               |
-| `total_transactions_amount`                 | number                                   |                               |
-| `total_transactions_count`                  | integer                                  |                               |
-| `total_counterparts_count`                  | integer                                  |                               |
-| `total_sent_transactions_amount`            | number                                   |                               |
-| `total_sent_transactions_count`             | integer                                  |                               |
-| `total_sent_counterparts_count`             | integer                                  |                               |
-| `total_received_transactions_amount`        | number                                   |                               |
-| `total_received_transactions_count`         | integer                                  |                               |
-| `total_received_counterparts_count`         | integer                                  |                               |
-| `gambling_message_count`                    | integer                                  |                               |
-| `spam_message_count`                        | integer                                  |                               |
-| `scam_message_count`                        | integer                                  |                               |
-| `bridge_wallet_status`                      | string[]                                 |                               |
-| `exchange_wallet_status`                    | string[]                                 |                               |
-| `stacking_wallet_status`                    | string[]                                 |                               |
-| `miner_wallet_status`                       | string[]                                 |                               |
-| `nft_wallet_status`                         | string[]                                 |                               |
-| `total_usdt_transactions_amount`            | number                                   |                               |
-| `usdt_balance`                              | number                                   |                               |
-| `total_balance_in_usd`                      | number                                   |                               |
-| `total_transactions_amount_in_usd`          | number                                   |                               |
-| `total_received_transactions_amount_in_usd` | number                                   |                               |
-| `total_sent_transactions_amount_in_usd`     | number                                   |                               |
+| Parameter                                   | Type                                     | Description                                                         | 
+|---------------------------------------------|------------------------------------------|---------------------------------------------------------------------|
+| `uuid`                                      | string                                   | universally unique identifier for risk scoring, use it as report id |
+| `version`                                   | string                                   | api version                                                         |
+| `whitelist`                                 | boolean                                  |                                                                     |
+| `blacklist`                                 | boolean                                  |                                                                     |
+| `address`                                   | string                                   | TON wallet address                                                  |
+| `address_raw`                               | string                                   | default: unknown                                                    |
+| `address_non_bounceable`                    | string                                   | default: unknown                                                    |
+| `address_type`                              | string                                   | default: unknown                                                    |
+| `owner`                                     | string                                   | default: unknown                                                    |
+| `risk_score`                                | integer                                  |                                                                     |
+| `fraud_level`                               | enum[high, medium, low, lowest, unknown] | default: lowest                                                     |                    
+| `risk_category`                             | string[]                                 |                                                                     |
+| `total_days`                                | integer                                  |                                                                     |
+| `first_transaction_time`                    | string                                   |                                                                     |
+| `last_transaction_time`                     | string                                   |                                                                     |
+| `total_balance`                             | number                                   |                                                                     |
+| `total_transactions_amount`                 | number                                   |                                                                     |
+| `total_transactions_count`                  | integer                                  |                                                                     |
+| `total_counterparts_count`                  | integer                                  |                                                                     |
+| `total_sent_transactions_amount`            | number                                   |                                                                     |
+| `total_sent_transactions_count`             | integer                                  |                                                                     |
+| `total_sent_counterparts_count`             | integer                                  |                                                                     |
+| `total_received_transactions_amount`        | number                                   |                                                                     |
+| `total_received_transactions_count`         | integer                                  |                                                                     |
+| `total_received_counterparts_count`         | integer                                  |                                                                     |
+| `gambling_message_count`                    | integer                                  |                                                                     |
+| `spam_message_count`                        | integer                                  |                                                                     |
+| `scam_message_count`                        | integer                                  |                                                                     |
+| `bridge_wallet_status`                      | string[]                                 |                                                                     |
+| `exchange_wallet_status`                    | string[]                                 |                                                                     |
+| `stacking_wallet_status`                    | string[]                                 |                                                                     |
+| `miner_wallet_status`                       | string[]                                 |                                                                     |
+| `nft_wallet_status`                         | string[]                                 |                                                                     |
+| `total_usdt_transactions_amount`            | number                                   |                                                                     |
+| `usdt_balance`                              | number                                   |                                                                     |
+| `total_balance_in_usd`                      | number                                   |                                                                     |
+| `total_transactions_amount_in_usd`          | number                                   |                                                                     |
+| `total_received_transactions_amount_in_usd` | number                                   |                                                                     |
+| `total_sent_transactions_amount_in_usd`     | number                                   |                                                                     |
 
 
 
@@ -184,87 +181,37 @@ https://api-amlplatform-1733986985.dev-rtbst.com/v1/reports/wallet_risk_score?so
 
 **Errors**
 
-```json
-{
-  "code": "integer",
-  "detail": "string"
-}
-```
-
-`400` **Bad Request** 
-
 **Content-Type** `application/json`
 
 ```json
 {
-  "code": 1003,
-  "detail": "The address length should be 48 characters long"
-}
-```
-
-`401` **Unauthorized**
-
-`application/json`
-
-```json
-{
-  "code": 1005,
-  "detail": "Invalid user credentials."
-}
-```
-
-`402` **Payment Required**
-
-`application/json`
-
-```json
-{
-  "code": 1002,
-  "detail": "The limit on the number of available requests has been exhausted."
-}
-```
-
-`403` **Forbidden**
-
-`application/json`
-
-```json
-{
   "code": "integer",
   "detail": "string"
 }
 ```
 
-`422` **Validation Error**
+| code | detail                                                           | 
+|------|------------------------------------------------------------------|
+| 1003 | The address length should be 48 characters long                  |
+| 1002 | The limit on the number of available requests has been exhausted | 
+| 0    | Too Many Requests                                                |
 
-`application/json`
-
-```json
-{
-  "detail": {
-    "loc": "Partial(string) & Partial(integer)[]",
-    "msg": "string",
-    "type": "string"
-  }
-}
-```
-
-`429` **Too Many Requests**
-
-`application/json`
-
-```json
-{
-  "code": 0,
-  "detail":"Too Many Requests"
-}
-```
 
 ***
 
+
 ### [GET]/v1/reports/risk_scoring_history
 
-Returns risk scoring history for a specific user and address
+**Returns risk scoring history for a specific user and address**
+
+```
+HTTP request header provide  with `token` in the following format:
+token: "Bearer <jwt token>"
+
+https://api.tonguard.org/v1/reports/risk_scoring_history?address=EQCzFTXpNNsFu8IgJnRnkDyBCL2ry8KgZYiDi3Jt31ie8EIQ&limit=10&offset=0
+&risk_limit=90&risk_offset=10&info_category=1%2C2%2C3&risk_category=1%2C2%2C3&risk=high%2Cmedium&source=api&date_from=01.01.2024&date_to=31.12.2024
+```
+
 
 **Content-Type** `application/json`
 
@@ -285,15 +232,7 @@ Returns risk scoring history for a specific user and address
 | `date_to`       | string  | Date to for filter                                     | no       |
 
 
-**Headers**
-```
-// JWT token of authorised user
-token: string
-```
 
-```
-https://api-amlplatform-1733986985.dev-rtbst.com/v1/reports/wallet_risk_score?source=api&address=EQCzFTXpNNsFu8IgJnRnkDyBCL2ry8KgZYiDi3Jt31ie8EIQ
-```
 
 
 **Responses**
@@ -308,11 +247,11 @@ https://api-amlplatform-1733986985.dev-rtbst.com/v1/reports/wallet_risk_score?so
 | `version`                                   | string                                   | api version                   |
 | `created_dt`                                | string                                   |                               |
 | `endpoint_used`                             | string                                   |                               |
-| source: string //default: api               |                                          |                               |
+| `source`                                    | string                                   | default: api                  |
 | `whitelist`                                 | boolean                                  |                               |
 | `blacklist`                                 | boolean                                  |                               |
 | `address`                                   | string                                   | TON wallet address            |
-| `address_raw`                               | string                                   | default: unknown              ||
+| `address_raw`                               | string                                   | default: unknown              |
 | `address_non_bounceable`                    | string                                   | default: unknown              |
 | `address_type`                              | string                                   | default: unknown              |
 | `owner`                                     | string                                   | default: unknown              |
@@ -431,42 +370,181 @@ https://api-amlplatform-1733986985.dev-rtbst.com/v1/reports/wallet_risk_score?so
   "count": 8
 }
 ```
+***
+### [GET]/v1/reports/risk_history.csv
 
+**Returns risk scoring history in a csv file**
 
-`400` **Bad Request**
+```
+HTTP request header provide  with `token` in the following format:
+token: "Bearer <jwt token>"
 
+https://api.tonguard.org/v1/reports/risk_history.csv?address=EQCzFTXpNNsFu8IgJnRnkDyBCL2ry8KgZYiDi3Jt31ie8EIQ
+&risk_limit=90&risk_offset=10&info_category=1%2C2%2C3&risk_category=1%2C2%2C3&risk=high%2Cmedium&source=api
+&date_from=01.01.2024&date_to=31.12.2024
+```
 **Content-Type** `application/json`
 
-```ts
-{
-  code: integer
-  detail: string
-}
-```
+**Parameters(Query)**
 
-`404` **Not Found**
+| Parameter       | Type    | Description                                            | Required |
+|-----------------|---------|--------------------------------------------------------|----------|
+| `address`       | string  | TON wallet address in any base64 form (urlsafe or not) | no       |
+| `risk_limit`    | integer |                                                        |          |
+| `risk_offset `  | integer | Offset of risk for filter                              |          |          
+| `info_category` | string  | List of info tags for filter.                          |          |         
+| `risk_category` | string  | List of risk tags for filter.                          |          |          
+| `risk`          | string  | List of risk levels for filter.                        |          |          
+| `source`        | string  | Source of the request                                  |          |          
+| `date_from`     | string  | Date from for filter                                   |          |          
+| `date_to`       | string  | Date to for filter                                     |          |          
 
-**Content-Type** `application/json`
+**Responses**
 
-```ts
-{
-  code: integer
-  detail: string
-}
-```
-
-`422` **Validation Error**
-
-**Content-Type** `application/json`
-
-```ts
-{
-  detail: {
-    loc: Partial(string) & Partial(integer)[]
-    msg: string
-    type: string
-  }[]
-}
-```
+`200` **Risk scoring history successfully retrieved**
 
 ***
+
+### [GET]/v1/reports/risk_scoring_report
+
+**Return risk scoring report for a specific uuid**
+
+```
+HTTP request header provide  with `token` in the following format:
+token: "Bearer <jwt token>"
+
+https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=fcf31537-794b-4a25-ae66-d5454b1eb545
+```
+**Content-Type** `application/json`
+
+**Parameters (Query)**
+
+| Parameter | Type   | Description               | Required |
+|-----------|--------|---------------------------|----------|
+| `uuid`    | string | id of risk scoring report | yes      |
+
+**Responses**
+
+| Parameter                              | Type             | Description | 
+|----------------------------------------|------------------|-------------|
+| version                                | string           |             |
+| uuid                                   | string           |             |
+| created_dt                             | string           |             |
+| endpoint_used                          | string           |             |
+| source                                 | string | api/manual  |
+| whitelist                              | boolean          |             |
+| blacklist                              | boolean          |             |
+| address                                | string           |             |
+| address_type                           | string //default | unknown     |
+| address_raw                            | string           |             |
+| address_non_bounceable                 | string           |             |
+| owner                                  | string //default | unknown     |
+| fraud_level                            | string           |             |
+| risk_score                             | integer          |             |
+| info_category                          | integer[]        |             |
+| risk_category                          | integer[]        |             |
+| risky_connections                      |[]               |             |
+| first_transaction_time                 | string           |             |
+| last_transaction_time                  | string           |             |
+| total_balance                          | number           |             |
+| total_balance_in_usd                   | number           |             |
+| total_days                             | number           |             |
+| total_transactions_amount              | number           |             |
+| total_transactions_amount_in_usd       | number           |             |
+| total_sent_transactions_amount         | number           |             |
+| total_sent_transactions_amount_in_usd  | number           |             |
+| total_received_transactions_amount     | number           |             |
+| total_received_transactions_amount_in_usd | number           |             |
+| total_counterparts_count               | integer          |             |
+| total_sent_counterparts_count          | integer          |             |
+| total_received_counterparts_count      | integer          |             |
+| total_transactions_count               | integer          |             |
+| total_sent_transactions_count          | integer          |             |
+| total_received_transactions_count      | integer          |             |
+| bridge_wallet_status                   | string[]         |             |
+| exchange_wallet_status                 | string[]         |             |
+| stacking_wallet_status                 | string[]         |             |
+| miner_wallet_status                    | string[]         |             |
+| nft_wallet_status                      | string[]         |             |
+| gambling_message_count                 | integer          |             |
+| spam_message_count                     | integer          |             |
+| scam_message_count                     | integer          |             |
+| usdt_balance                           | number           |             |
+| total_usdt_transactions_amount         | number           |             |
+
+
+**Content-Type** `application/json`
+```json
+{
+  "report": {
+    "version": "2.0.0",
+    "uuid": "fcf31537-794b-4a25-ae66-d5454b1eb545",
+    "created_dt": "2024-12-13T00:50:43.791818+00:00",
+    "endpoint_used": "/v2/reports/wallet_risk_score",
+    "source": "api",
+    "whitelist": true,
+    "blacklist": false,
+    "address": "EQDug2S5evQ3jPR1wZJX3qq9BluTdVhoOCQ2-_Guy9oy4Jhi",
+    "address_type": "unknown",
+    "address_raw": "0:ee8364b97af4378cf475c19257deaabd065b93755868382436fbf1aecbda32e0",
+    "address_non_bounceable": "UQDug2S5evQ3jPR1wZJX3qq9BluTdVhoOCQ2-_Guy9oy4MWn",
+    "owner": "unknown",
+    "fraud_level": null,
+    "risk_score": null,
+    "info_category": [],
+    "risk_category": [],
+    "risky_connections": [],
+    "first_transaction_time": null,
+    "last_transaction_time": null,
+    "total_balance": 0.01794588,
+    "total_balance_in_usd": null,
+    "total_days": null,
+    "total_transactions_amount": null,
+    "total_transactions_amount_in_usd": null,
+    "total_sent_transactions_amount": null,
+    "total_sent_transactions_amount_in_usd": null,
+    "total_received_transactions_amount": null,
+    "total_received_transactions_amount_in_usd": null,
+    "total_counterparts_count": null,
+    "total_sent_counterparts_count": null,
+    "total_received_counterparts_count": null,
+    "total_transactions_count": null,
+    "total_sent_transactions_count": null,
+    "total_received_transactions_count": null,
+    "bridge_wallet_status": [],
+    "exchange_wallet_status": [],
+    "stacking_wallet_status": [],
+    "miner_wallet_status": [],
+    "nft_wallet_status": [],
+    "gambling_message_count": null,
+    "spam_message_count": null,
+    "scam_message_count": null,
+    "usdt_balance": null,
+    "total_usdt_transactions_amount": null
+  }
+}
+```
+***
+### [GET]/v1/reports/risk_scoring_report_{uuid}.pdf
+
+**Download risk scoring report as a pdf-file**
+
+```
+HTTP request header provide  with `token` in the following format:
+token: "Bearer <jwt token>"
+
+https://api.tonguard.org/v1/reports/risk_scoring_report_fcf31537-794b-4a25-ae66-d5454b1eb545.pdf
+```
+**Content-Type** `application/json`
+
+**Parameters (Query)**
+
+| Parameter | Type   | Description               | Required |
+|-----------|--------|---------------------------|----------|
+| `uuid`    | string | id of risk scoring report | yes      |
+
+**Responses**
+`200` **Data successfully downloaded**
+
+***
+

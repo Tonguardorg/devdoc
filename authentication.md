@@ -26,12 +26,12 @@ User authentication. Does not exceed remaining number of queries for the user
 
 `200` **Returns JWT token related info and remaining number of queries**
 
-| Parameter  | Type   | Description                                          | 
-|------------|--------|------------------------------------------------------|
-| `token` | string | token                                                | 
-| `token_type` | string | default: JWT                                      | 
-| `expiry` | string | token expiry time in '%d/%m/%Y, %H:%M:%S GMT' format | 
-| `queries_count_left` | integer | Risk score queries left             |
+| Parameter            | Type    | Description                                          | 
+|----------------------|---------|------------------------------------------------------|
+| `token`              | string  | token                                                | 
+| `token_type`         | string  | default: JWT                                         | 
+| `expiry`             | string  | token expiry time in '%d/%m/%Y, %H:%M:%S GMT' format | 
+| `queries_count_left` | integer | Risk score queries left                              |
 
 
 **Content-Type** `application/json`
@@ -46,18 +46,23 @@ User authentication. Does not exceed remaining number of queries for the user
 ```
 ***
 ### Authorization errors
-***
-`401` **Unauthorized**
 
 **Content-Type** `application/json`
-
 ```json
 {
-  "code": 1005,
-  "detail": "Invalid user credentials."
+  "code": "integer",
+  "detail": "string"
 }
 ```
+
+| status code | type              | code | detail                   | 
+|-------------|-------------------|------|--------------------------|
+| 401         | unauthorized      | 1005 | Invalid user credentials |
+| 422         | validation Error  |      | See below                |
+| 429         | too many requests | 0    | Too Many Requests        |      
+
 ***
+
 `422` **Validation Error**
 
 **Content-Type** `application/json`
@@ -78,15 +83,4 @@ User authentication. Does not exceed remaining number of queries for the user
     "code": 1000
   }
 ]
-```
-***
-`429` **Too Many Requests**
-
-**Content-Type** `application/json`
-
-```json
-{
-  "code": 0,
-  "detail":"Too Many Requests"
-}
 ```
