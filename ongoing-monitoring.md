@@ -23,10 +23,11 @@ POST /v1/auth/login
 }
 ```
 
-2. Using the access token add the desired URL to receive notifications via
+2. Using the access token add the desired URL and emai to receive notifications
 
 ```
-POST /v1/monitoring/notify_setting?notify_url=https://your_site.com
+POST /v1/monitoring/notify_setting?notify_url=https%3A%2F%2Fexample.com%2Fv1%2Freceive
+&email=example%40mail.com
 ```
 
 3. Using the access token get the list of your available notification settings
@@ -39,17 +40,13 @@ You will receive the list like this
 
 ```
 {
-  "count": 2,
+  "count": 1,
   "notify_settings": [
     {
-      "id": 1,
-      "notify_url": "https://example.com/v1/receive/1",
-      "created_dt": "2024-05-22T09:46:44.426269+00:00"
-    },
-    {
-      "id": 2,
-      "notify_url": "https://example.com/v1/receive/2",
-      "created_dt": "2024-05-22T09:46:44.838765+00:00"
+      "id": 8,
+      "notify_url": "https://example.com/v1/receive",
+      "email": "example@mail.com",
+      "created_dt": "2024-12-16T11:27:02.242056+00:00"
     }
   ]
 }
@@ -58,14 +55,14 @@ You will receive the list like this
 Remember the `id` of the notify_url you want to use
 
 4. Using the access token create your monitoring rule. For key `monitoring_notify_setting_id` use the id received in 3.
-Yet only risk score value is available as a base rule, so specify key `monitoring_rule_info_id` to be `1`.
+Yet only risk score value is available as a base rule, so specify key `monitoring_rule_info_key` to be `risk_threshold`.
 `rule_name_custom` and `comment` are optional and can be skipped (not added to JSON body)
 
 ```
 POST /v1/monitoring/user_rule
 {
-  "monitoring_notify_setting_id": 1,
-  "monitoring_rule_info_id": 1,
+  "monitoring_notify_setting_id": 8,
+  "monitoring_rule_info_key": risk_threshold,
   "custom_parameter": {},
   "rule_name_custom": "Your custom name",
   "comment": "Your comment"
@@ -88,28 +85,17 @@ You will receive the list like this
 
 ```
 {
-  "count": 2,
+  "count": 1,
   "user_rules": [
     {
-      "id": 1,
-      "monitoring_notify_setting_id": 3,
-      "monitoring_rule_info_id": 1,
+      "id": 4,
+      "monitoring_notify_setting_id": 8,
+      "monitoring_rule_info_key": "risk_threshold",
       "custom_parameter": null,
-      "rule_name": "Risk threshold",
-      "comment": null,
-      "created_dt": "2024-05-22T09:46:45.099177+00:00"
-    },
-    {
-      "id": 2,
-      "monitoring_notify_setting_id": 4,
-      "monitoring_rule_info_id": 1,
-      "custom_parameter": {
-        "risk_threshold": 99
-      },
-      "rule_name": "Risk threshold = 99",
-      "comment": "Random comment",
-      "created_dt": "2024-05-22T09:46:45.309196+00:00"
-    },
+      "rule_name": "string",
+      "comment": "string",
+      "created_dt": "2024-12-16T11:45:49.142165+00:00"
+    }
   ]
 }
 ```
@@ -123,7 +109,7 @@ Using the access token triggers the endpoint below. You can pass `address` in EQ
 ```
 POST /v1/monitoring/address_under_rule
 {
-  "monitoring_user_rule_id": 1,
+  "monitoring_user_rule_id": 4,
   "address": "UQB879Q7IRXY-uLWBX9FomGCR0uxmyNjqqNgeqWYdk1Yx9d6",
   "comment": "string"
 }
@@ -151,9 +137,28 @@ You will receive the list like this
   ]
 }
 ```
+```{
+  "count": 1,
+  "addresses": [
+    {
+      "address_under_rule_ids": [
+        1
+      ],
+      "address_non_bounce": "UQDrLq-X6jKZNHAScgghh0h1iog3StK71zn8dcmrOj8jPTmF",
+      "rule_names": [
+        "string"
+      ],
+      "first_added_dt": "2024-12-16T11:48:31.368888+00:00",
+      "risk_score": null,
+      "fraud_level": null,
+      "last_alert_dt": null
+    }
+  ]
+}
+```
 
 8. You may want to exclude some address from monitoring. 
-To do so, trigger the following endpoint passing `monitoring_address_under_rule_id` from 7.
+To do so, trigger the following endpoint passing `address_under_rule_ids` from 7.
 
 ```
 DELETE /v1/monitoring/address_under_rule
