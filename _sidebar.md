@@ -1,5 +1,7 @@
 - [Authentication](authentication)
 - [Reports](reports)
+- [Claims](claims)
+- [Monitoring](monitoring)
 - [API descripton](tonguard-api)
 - [Ongoing monitoring](ongoing-monitoring)
 - [Dictionary](dictionary)
