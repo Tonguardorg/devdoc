@@ -2,6 +2,8 @@
 - [Reports](reports)
 - [Claims](claims)
 - [Monitoring](monitoring)
+- [Visualizer](visualizer.md)
+- [Top holders](top-holders.md)
 - [API descripton](tonguard-api)
 - [Ongoing monitoring](ongoing-monitoring)
 - [Dictionary](dictionary)
