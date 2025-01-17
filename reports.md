@@ -1,6 +1,7 @@
 ##  Reports
 
-Returns address risk score, risk level and query related info,including the usdt information. Each query exceeds remaining number of queries for the user.
+Returns address risk score, risk level and query related info,including the usdt information. 
+Each request reduces the remaining number of user's requests.
 
 ### [GET]/v2/reports/wallet_risk_score
 **Risk score, risk level and query related info**
@@ -8,63 +9,65 @@ Returns address risk score, risk level and query related info,including the usdt
 ```
 HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
-
-https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=EQCzFTXpNNsFu8IgJnRnkDyBCL2ry8KgZYiDi3Jt31ie8EIQ
+```
+**Example**
+```
+https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADRESS
 ```
 
 **Content-Type** `application/json`
 
 **Parameters (Query)**
 
-| Parameter | Type   | Description                                            | Requried             |
+| Parameter | Type   | Description                                            | Required             |
 |-----------|--------|--------------------------------------------------------|----------------------|
 | `address` | string | TON wallet address in any base64 form (urlsafe or not) | yes                  |
-| `source`  | string | source of the request<br/>api, manual                  | no <br/>default: api |
+| `source`  | string | source of the request<br/>options: api, manual         | no <br/>default: api |
 
 
 **Responses**
 
-| Parameter                                   | Type                                     | Description                                                         | 
-|---------------------------------------------|------------------------------------------|---------------------------------------------------------------------|
-| `uuid`                                      | string                                   | universally unique identifier for risk scoring, use it as report id |
-| `version`                                   | string                                   | api version                                                         |
-| `whitelist`                                 | boolean                                  |                                                                     |
-| `blacklist`                                 | boolean                                  |                                                                     |
-| `address`                                   | string                                   | TON wallet address                                                  |
-| `address_raw`                               | string                                   | default: unknown                                                    |
-| `address_non_bounceable`                    | string                                   | default: unknown                                                    |
-| `address_type`                              | string                                   | default: unknown                                                    |
-| `owner`                                     | string                                   | default: unknown                                                    |
-| `risk_score`                                | integer                                  |                                                                     |
-| `fraud_level`                               | enum[high, medium, low, lowest, unknown] | default: lowest                                                     |                    
-| `risk_category`                             | string[]                                 |                                                                     |
-| `total_days`                                | integer                                  |                                                                     |
-| `first_transaction_time`                    | string                                   |                                                                     |
-| `last_transaction_time`                     | string                                   |                                                                     |
-| `total_balance`                             | number                                   |                                                                     |
-| `total_transactions_amount`                 | number                                   |                                                                     |
-| `total_transactions_count`                  | integer                                  |                                                                     |
-| `total_counterparts_count`                  | integer                                  |                                                                     |
-| `total_sent_transactions_amount`            | number                                   |                                                                     |
-| `total_sent_transactions_count`             | integer                                  |                                                                     |
-| `total_sent_counterparts_count`             | integer                                  |                                                                     |
-| `total_received_transactions_amount`        | number                                   |                                                                     |
-| `total_received_transactions_count`         | integer                                  |                                                                     |
-| `total_received_counterparts_count`         | integer                                  |                                                                     |
-| `gambling_message_count`                    | integer                                  |                                                                     |
-| `spam_message_count`                        | integer                                  |                                                                     |
-| `scam_message_count`                        | integer                                  |                                                                     |
-| `bridge_wallet_status`                      | string[]                                 |                                                                     |
-| `exchange_wallet_status`                    | string[]                                 |                                                                     |
-| `stacking_wallet_status`                    | string[]                                 |                                                                     |
-| `miner_wallet_status`                       | string[]                                 |                                                                     |
-| `nft_wallet_status`                         | string[]                                 |                                                                     |
-| `total_usdt_transactions_amount`            | number                                   |                                                                     |
-| `usdt_balance`                              | number                                   |                                                                     |
-| `total_balance_in_usd`                      | number                                   |                                                                     |
-| `total_transactions_amount_in_usd`          | number                                   |                                                                     |
-| `total_received_transactions_amount_in_usd` | number                                   |                                                                     |
-| `total_sent_transactions_amount_in_usd`     | number                                   |                                                                     |
+| Parameter                                   | Type      | Description                                                                                                                                                                                                   | 
+|---------------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `uuid`                                      | string    | universally unique identifier for risk scoring, use it as report id                                                                                                                                           |
+| `version`                                   | string    | api version                                                                                                                                                                                                   |
+| `whitelist`                                 | boolean   | an indication that the address is on the whitelist, if address is included in the private whitelist, it's Risk level is automatically lowered to a low level                                                  |
+| `blacklist`                                 | boolean   | an indication that the address is on the blacklist                                                                                                                                                            |
+| `address`                                   | string    | TON wallet address bounceable format                                                                                                                                                                          |
+| `address_raw`                               | string    | TON wallet address raw format, default: unknown                                                                                                                                                               |
+| `address_non_bounceable`                    | string    | TON wallet address non-bounceable format, default: unknown                                                                                                                                                    |
+| `address_type`                              | string    | default: unknown                                                                                                                                                                                              |
+| `owner`                                     | string    | default: unknown                                                                                                                                                                                              |
+| `risk_score`                                | integer   | risk score level                                                                                                                                                                                              |
+| `fraud_level`                               | enum      | risk levelss: <br/>lowest risk (0 - 12),<br/>low risk (12 - 46), <br/>medium risk (46 – 82), <br/>high risk (82 – 100). <br/>Wallets with no clear activity may beclassified as Unknown. <br/>Default: lowest |                    
+| `risk_category`                             | string [] | see dictionary [risk category ](../dictionary.md), <br/> structure <br/>{ <br/>"code": 20, <br/>"name": "Spam", <br/>"type": "RISK", <br/>"description": "Related to spammers" <br/>}                         |
+| `total_days`                                | integer   | the number of days the address has existed since the first transaction with the analyzed address                                                                                                              |
+| `first_transaction_time`                    | string    | date of the first analyzed transaction                                                                                                                                                                        |
+| `last_transaction_time`                     | string    | date of the last analyzed transaction                                                                                                                                                                         |
+| `total_balance`                             | number    | current balance value of the analyzed address                                                                                                                                                                 |
+| `total_transactions_amount`                 | number    | current turnover value for the analyzed address                                                                                                                                                               |
+| `total_transactions_count`                  | integer   | total number of transactions made with the analyzed address                                                                                                                                                   |
+| `total_counterparts_count`                  | integer   | total number of addresses that have ever interacted with the analyzed address                                                                                                                                 |
+| `total_sent_transactions_amount`            | number    | amount of cryptocurrency sent by the analyzed address                                                                                                                                                         |
+| `total_sent_transactions_count`             | integer   | total number of addresses that sent cryptocurrency to the analyzed address                                                                                                                                    |
+| `total_sent_counterparts_count`             | integer   | total number of addresses that received cryptocurrency from the analyzed address                                                                                                                              |
+| `total_received_transactions_amount`        | number    |                                                                                                                                                                                                               |
+| `total_received_transactions_count`         | integer   | amount of cryptocurrency received by the analyzed address                                                                                                                                                     |
+| `total_received_counterparts_count`         | integer   |                                                                                                                                                                                                               |
+| `gambling_message_count`                    | integer   |                                                                                                                                                                                                               |
+| `spam_message_count`                        | integer   |                                                                                                                                                                                                               |
+| `scam_message_count`                        | integer   |                                                                                                                                                                                                               |
+| `bridge_wallet_status`                      | string[]  |                                                                                                                                                                                                               |
+| `exchange_wallet_status`                    | string[]  |                                                                                                                                                                                                               |
+| `stacking_wallet_status`                    | string[]  |                                                                                                                                                                                                               |
+| `miner_wallet_status`                       | string[]  |                                                                                                                                                                                                               |
+| `nft_wallet_status`                         | string[]  |                                                                                                                                                                                                               |
+| `total_usdt_transactions_amount`            | number    |                                                                                                                                                                                                               |
+| `usdt_balance`                              | number    | current balance and turnover of USDT jettons for the analyzed address                                                                                                                                         |
+| `total_balance_in_usd`                      | number    |                                                                                                                                                                                                               |
+| `total_transactions_amount_in_usd`          | number    |                                                                                                                                                                                                               |
+| `total_received_transactions_amount_in_usd` | number    |                                                                                                                                                                                                               |
+| `total_sent_transactions_amount_in_usd`     | number    |                                                                                                                                                                                                               |
 
 
 
@@ -207,9 +210,10 @@ https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=EQCzFTX
 ```
 HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
-
-https://api.tonguard.org/v1/reports/risk_scoring_history?address=EQCzFTXpNNsFu8IgJnRnkDyBCL2ry8KgZYiDi3Jt31ie8EIQ&limit=10&offset=0
-&risk_limit=90&risk_offset=10&info_category=1%2C2%2C3&risk_category=1%2C2%2C3&risk=high%2Cmedium&source=api&date_from=01.01.2024&date_to=31.12.2024
+```
+```
+https://api.tonguard.org/v1/reports/risk_scoring_history?address=ADDRESS&limit=INTEGER&offset=INTEGER
+&risk_limit=INTEGER&risk_offset=INTEGER&info_category=INTEGER&risk_category=INTEGER&risk=high%2Cmedium&source=api&date_from=01.01.2024&date_to=31.12.2024
 ```
 
 
@@ -241,53 +245,53 @@ https://api.tonguard.org/v1/reports/risk_scoring_history?address=EQCzFTXpNNsFu8I
 
 **Content-Type** `application/json`
 
-| Parameter                                   | Type                                     | Description                   | 
-|---------------------------------------------|------------------------------------------|-------------------------------|
-| `uuid`                                      | string                                   | universally unique identifier |
-| `version`                                   | string                                   | api version                   |
-| `created_dt`                                | string                                   |                               |
-| `endpoint_used`                             | string                                   |                               |
-| `source`                                    | string                                   | default: api                  |
-| `whitelist`                                 | boolean                                  |                               |
-| `blacklist`                                 | boolean                                  |                               |
-| `address`                                   | string                                   | TON wallet address            |
-| `address_raw`                               | string                                   | default: unknown              |
-| `address_non_bounceable`                    | string                                   | default: unknown              |
-| `address_type`                              | string                                   | default: unknown              |
-| `owner`                                     | string                                   | default: unknown              |
-| `risk_score`                                | integer                                  |                               |
-| `risky_connections: {}`                     | []                                       |                               |
-| `info_category`                             | integer[]                                |                               |
-| `fraud_level`                               | enum[high, medium, low, lowest, unknown] | default: lowest               |                    
-| `risk_category`                             | string[]                                 |                               |
-| `total_days`                                | integer                                  |                               |
-| `first_transaction_time`                    | string                                   |                               |
-| `last_transaction_time`                     | string                                   |                               |
-| `total_balance`                             | number                                   |                               |
-| `total_transactions_amount`                 | number                                   |                               |
-| `total_transactions_count`                  | integer                                  |                               |
-| `total_counterparts_count`                  | integer                                  |                               |
-| `total_sent_transactions_amount`            | number                                   |                               |
-| `total_sent_transactions_count`             | integer                                  |                               |
-| `total_sent_counterparts_count`             | integer                                  |                               |
-| `total_received_transactions_amount`        | number                                   |                               |
-| `total_received_transactions_count`         | integer                                  |                               |
-| `total_received_counterparts_count`         | integer                                  |                               |
-| `gambling_message_count`                    | integer                                  |                               |
-| `spam_message_count`                        | integer                                  |                               |
-| `scam_message_count`                        | integer                                  |                               |
-| `bridge_wallet_status`                      | string[]                                 |                               |
-| `exchange_wallet_status`                    | string[]                                 |                               |
-| `stacking_wallet_status`                    | string[]                                 |                               |
-| `miner_wallet_status`                       | string[]                                 |                               |
-| `nft_wallet_status`                         | string[]                                 |                               |
-| `total_usdt_transactions_amount`            | number                                   |                               |
-| `usdt_balance`                              | number                                   |                               |
-| `total_balance_in_usd`                      | number                                   |                               |
-| `total_transactions_amount_in_usd`          | number                                   |                               |
-| `total_received_transactions_amount_in_usd` | number                                   |                               |
-| `total_sent_transactions_amount_in_usd`     | number                                   |                               |
-| `count`                                     | integer                                  |                               |
+| Parameter                                   | Type                                     | Description                                                                                                                                                  | 
+|---------------------------------------------|------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `uuid`                                      | string                                   | universally unique identifier                                                                                                                                |
+| `version`                                   | string                                   | api version                                                                                                                                                  |
+| `created_dt`                                | string                                   | date when the report was generated                                                                                                                           |
+| `endpoint_used`                             | string                                   | endpoint_used                                                                                                                                                |
+| `source`                                    | string                                   | default: api                                                                                                                                                 |
+| `whitelist`                                 | boolean                                  | an indication that the address is on the whitelist, if address is included in the private whitelist, it's Risk level is automatically lowered to a low level |
+| `blacklist`                                 | boolean                                  |                                                                                                                                                              |
+| `address`                                   | string                                   | TON wallet address                                                                                                                                           |
+| `address_raw`                               | string                                   | default: unknown                                                                                                                                             |
+| `address_non_bounceable`                    | string                                   | default: unknown                                                                                                                                             |
+| `address_type`                              | string                                   | default: unknown                                                                                                                                             |
+| `owner`                                     | string                                   | default: unknown                                                                                                                                             |
+| `risk_score`                                | integer                                  |                                                                                                                                                              |
+| `risky_connections: {}`                     | []                                       |                                                                                                                                                              |
+| `info_category`                             | integer[]                                |                                                                                                                                                              |
+| `fraud_level`                               | enum[high, medium, low, lowest, unknown] | default: lowest                                                                                                                                              |                    
+| `risk_category`                             | string[]                                 |                                                                                                                                                              |
+| `total_days`                                | integer                                  |                                                                                                                                                              |
+| `first_transaction_time`                    | string                                   |                                                                                                                                                              |
+| `last_transaction_time`                     | string                                   |                                                                                                                                                              |
+| `total_balance`                             | number                                   |                                                                                                                                                              |
+| `total_transactions_amount`                 | number                                   |                                                                                                                                                              |
+| `total_transactions_count`                  | integer                                  |                                                                                                                                                              |
+| `total_counterparts_count`                  | integer                                  |                                                                                                                                                              |
+| `total_sent_transactions_amount`            | number                                   |                                                                                                                                                              |
+| `total_sent_transactions_count`             | integer                                  |                                                                                                                                                              |
+| `total_sent_counterparts_count`             | integer                                  |                                                                                                                                                              |
+| `total_received_transactions_amount`        | number                                   |                                                                                                                                                              |
+| `total_received_transactions_count`         | integer                                  |                                                                                                                                                              |
+| `total_received_counterparts_count`         | integer                                  |                                                                                                                                                              |
+| `gambling_message_count`                    | integer                                  |                                                                                                                                                              |
+| `spam_message_count`                        | integer                                  |                                                                                                                                                              |
+| `scam_message_count`                        | integer                                  |                                                                                                                                                              |
+| `bridge_wallet_status`                      | string[]                                 |                                                                                                                                                              |
+| `exchange_wallet_status`                    | string[]                                 |                                                                                                                                                              |
+| `stacking_wallet_status`                    | string[]                                 |                                                                                                                                                              |
+| `miner_wallet_status`                       | string[]                                 |                                                                                                                                                              |
+| `nft_wallet_status`                         | string[]                                 |                                                                                                                                                              |
+| `total_usdt_transactions_amount`            | number                                   |                                                                                                                                                              |
+| `usdt_balance`                              | number                                   |                                                                                                                                                              |
+| `total_balance_in_usd`                      | number                                   |                                                                                                                                                              |
+| `total_transactions_amount_in_usd`          | number                                   |                                                                                                                                                              |
+| `total_received_transactions_amount_in_usd` | number                                   |                                                                                                                                                              |
+| `total_sent_transactions_amount_in_usd`     | number                                   |                                                                                                                                                              |
+| `count`                                     | integer                                  |                                                                                                                                                              |
 
 
 
@@ -378,10 +382,11 @@ https://api.tonguard.org/v1/reports/risk_scoring_history?address=EQCzFTXpNNsFu8I
 ```
 HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
-
-https://api.tonguard.org/v1/reports/risk_history.csv?address=EQCzFTXpNNsFu8IgJnRnkDyBCL2ry8KgZYiDi3Jt31ie8EIQ
-&risk_limit=90&risk_offset=10&info_category=1%2C2%2C3&risk_category=1%2C2%2C3&risk=high%2Cmedium&source=api
-&date_from=01.01.2024&date_to=31.12.2024
+```
+```
+https://api.tonguard.org/v1/reports/risk_history.csv?address=ADDRESS
+&risk_limit=INTEGER&risk_offset=INTEGER&info_category=INTEGERrisk_category=INTEGER&risk=RISK_LEVEL1,RISK_LEVEL2&source=SOURCE
+&date_from=DATE_FROM&date_to=DATE_TO
 ```
 **Content-Type** `application/json`
 
@@ -412,8 +417,9 @@ https://api.tonguard.org/v1/reports/risk_history.csv?address=EQCzFTXpNNsFu8IgJnR
 ```
 HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
-
-https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=fcf31537-794b-4a25-ae66-d5454b1eb545
+```
+```
+https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=UUID
 ```
 **Content-Type** `application/json`
 
@@ -532,8 +538,9 @@ https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=fcf31537-794b-4a25-
 ```
 HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
-
-https://api.tonguard.org/v1/reports/risk_scoring_report_fcf31537-794b-4a25-ae66-d5454b1eb545.pdf
+```
+```
+https://api.tonguard.org/v1/reports/risk_scoring_report_UUID.pdf
 ```
 **Content-Type** `application/json`
 

@@ -4,120 +4,32 @@
 
 Provides risk score and risk level estimation for TON blockchain addresses and etc  🚀
 
-## Endpoints list
 
-https://api.tonguard.org/
+API URL ```https://api.tonguard.org/```
 
-## Status codes
+Requests are made using the POST, GET, PATCH and DELETE methods.
 
-This API uses HTTP status codes to communicate with the API consumer.
+## Response Status codes
 
-`200 OK` - Response to a successful GET, PUT, PATCH or DELETE.
+This API uses HTTP status codes to communicate with the API consumer
 
-`201 Created` - Response to a POST that results in a creation.
+`200 OK` - Response to a successful GET, PUT, PATCH or DELETE
 
-`400 Bad Request` - Malformed request; request body validation errors.
+`201 Created` - Response to a POST that results in a creation
 
-`401 Unauthorized` - When no or invalid authentication details are provided.
+`400 Bad Request` - Malformed request; request body validation errors
 
-`403 Forbidden` - When authentication succeeded but authenticated user doesn't have access to the resource.
+`401 Unauthorized` - When no or invalid authentication details are provided
+
+`403 Forbidden` - When authentication succeeded but authenticated user doesn't have access to the resource
 
 `428 Requests Limit Reached` - When user reached his predefined maximum amount of requests
 
 `429 Rate Limit Exceeded` - When calls to certain endpoint for user are higher than predefined limits
 
-`500 Server Error` - Something went wrong on the API end.
+`500 Server Error` - Something went wrong on the API end
 
-`501 Not Implemented` - The server either does not recognize the request method, or it lacks the ability to fulfill the request.
-
-# List of available endpoints
-
-
-## Path Table
-
-| Method | Path | Description |
-| --- | --- | --- |
-| GET | [/v1/reports/wallet_risk_score](#getv1reportswallet_risk_score) | Returns address risk score, risk level and query related info. Each query exceeds remaining number of queries for the user. |
-| GET | [/v1/reports/risk_scoring_history](#getv1reportsrisk_scoring_history) | Returns risk scoring history for a specific user and address. |
-| GET | [/v1/reports/risk_scoring_report](#getv1reportsrisk_scoring_report) | Return risk scoring report for a specific uuid. |
-| GET | [/v1/reports/risk_scoring_report_{uuid}.pdf](#getv1reportsrisk_scoring_report_uuidpdf) | Download report as a pdf file. |
-| GET | [/v1/reports/risk_history.csv](#getv1reportsrisk_historycsv) | Returns risk scoring history in a csv file. |
-| POST | [/v1/claims/report_wallets](#postv1claimsreport_wallets) | Create Wallet Claim |
-| PUT | [/v1/claims/update_wallet_claim/{uuid}](#putv1claimsupdate_wallet_claimuuid) | Update Wallet Claim |
-| GET | [/v1/claims/my](#getv1claimsmy) | Get Claims |
-| DELETE | [/v1/claims/delete](#deletev1claimsdelete) | Delete Claims |
-| GET | [/v1/claims/wallets_tags](#getv1claimswallets_tags) | Wallets Tags |
-| GET | [/v1/claims/claim_history.csv](#getv1claimsclaim_historycsv) | Returns claims history in a csv file. |
-| GET | [/v1/visualizer/get_transactions_graph](#getv1visualizerget_transactions_graph) | Visualizer |
-| GET | [/v1/visualizer/get_last_transactions_graph](#getv1visualizerget_last_transactions_graph) | Last Transactions Graph |
-| PUT | [/v1/visualizer/update_transactions_graph](#putv1visualizerupdate_transactions_graph) | Update Transactions Graph |
-| GET | [/v1/monitoring/wallet_list](#getv1monitoringwallet_list) | Get user monitoring wallets |
-| GET | [/v1/monitoring/notify_setting](#getv1monitoringnotify_setting) | Get user notification urls |
-| POST | [/v1/monitoring/notify_setting](#postv1monitoringnotify_setting) | Add user notification url |
-| GET | [/v1/monitoring/user_rule](#getv1monitoringuser_rule) | Get user rules |
-| POST | [/v1/monitoring/user_rule](#postv1monitoringuser_rule) | Add user rule |
-| GET | [/v1/monitoring/address_under_rule](#getv1monitoringaddress_under_rule) | Get addresses under monitoring |
-| POST | [/v1/monitoring/address_under_rule](#postv1monitoringaddress_under_rule) | Attach a user rule to a wallet |
-| DELETE | [/v1/monitoring/address_under_rule](#deletev1monitoringaddress_under_rule) | Delete address from monitoring |
-| GET | [/v1/monitoring/user_rule_statistic](#getv1monitoringuser_rule_statistic) | Get User Rule Statistic |
-| GET | [/v1/whitelists/whitelist.csv](#getv1whitelistswhitelistcsv) | Download whitelist as a file. |
-| POST | [/v1/whitelists/whitelist.csv](#postv1whitelistswhitelistcsv) | Upload whitelist data |
-| GET | [/v1/users/me](#getv1usersme) | Get user info |
-| GET | [/v1/top_holders/top_usdt_holders](#getv1top_holderstop_usdt_holders) | Returns a list of 100 top USDT holders. |
-| GET | [/v2/reports/wallet_risk_score](#getv2reportswallet_risk_score) | Returns address risk score, risk level and query related info,including the usdt information.Each query exceeds remaining number of queries for the user. |
-
-## Reference Table
-
-| Name | Path | Description |
-| --- | --- | --- |
-| AddressUnderRule | [#/components/schemas/AddressUnderRule](#componentsschemasaddressunderrule) |  |
-| AddressesUnderRule | [#/components/schemas/AddressesUnderRule](#componentsschemasaddressesunderrule) |  |
-| ApiError | [#/components/schemas/ApiError](#componentsschemasapierror) |  |
-| AuthRequest | [#/components/schemas/AuthRequest](#componentsschemasauthrequest) |  |
-| Body_update_transactions_graph_v1_visualizer_update_transactions_graph_put | [#/components/schemas/Body_update_transactions_graph_v1_visualizer_update_transactions_graph_put](#componentsschemasbody_update_transactions_graph_v1_visualizer_update_transactions_graph_put) |  |
-| Body_upload | [#/components/schemas/Body_upload](#componentsschemasbody_upload) |  |
-| ClaimWalletTag | [#/components/schemas/ClaimWalletTag](#componentsschemasclaimwallettag) |  |
-| ClaimedWallet | [#/components/schemas/ClaimedWallet](#componentsschemasclaimedwallet) |  |
-| CreateAddressUnderRule | [#/components/schemas/CreateAddressUnderRule](#componentsschemascreateaddressunderrule) |  |
-| CreateUserRule | [#/components/schemas/CreateUserRule](#componentsschemascreateuserrule) |  |
-| DeleteAddressUnderRule | [#/components/schemas/DeleteAddressUnderRule](#componentsschemasdeleteaddressunderrule) |  |
-| Edge | [#/components/schemas/Edge](#componentsschemasedge) |  |
-| HTTPValidationError | [#/components/schemas/HTTPValidationError](#componentsschemashttpvalidationerror) |  |
-| MonitoringWallet | [#/components/schemas/MonitoringWallet](#componentsschemasmonitoringwallet) |  |
-| MonitoringWallets | [#/components/schemas/MonitoringWallets](#componentsschemasmonitoringwallets) |  |
-| Node | [#/components/schemas/Node](#componentsschemasnode) |  |
-| NodeAdditionalData | [#/components/schemas/NodeAdditionalData](#componentsschemasnodeadditionaldata) |  |
-| NodeRiskScore | [#/components/schemas/NodeRiskScore](#componentsschemasnoderiskscore) |  |
-| NodeWithPosition | [#/components/schemas/NodeWithPosition](#componentsschemasnodewithposition) |  |
-| NotifySetting | [#/components/schemas/NotifySetting](#componentsschemasnotifysetting) |  |
-| NotifySettings | [#/components/schemas/NotifySettings](#componentsschemasnotifysettings) |  |
-| RiskScoreHistoryResponse | [#/components/schemas/RiskScoreHistoryResponse](#componentsschemasriskscorehistoryresponse) |  |
-| RiskScoringMixin | [#/components/schemas/RiskScoringMixin](#componentsschemasriskscoringmixin) |  |
-| RiskScoringReportResponse | [#/components/schemas/RiskScoringReportResponse](#componentsschemasriskscoringreportresponse) |  |
-| RiskyConnection | [#/components/schemas/RiskyConnection](#componentsschemasriskyconnection) |  |
-| SourceOfFunds | [#/components/schemas/SourceOfFunds](#componentsschemassourceoffunds) |  |
-| TokenPayload | [#/components/schemas/TokenPayload](#componentsschemastokenpayload) |  |
-| TopUsdtHolder | [#/components/schemas/TopUsdtHolder](#componentsschemastopusdtholder) |  |
-| UserClaim | [#/components/schemas/UserClaim](#componentsschemasuserclaim) |  |
-| UserClaims | [#/components/schemas/UserClaims](#componentsschemasuserclaims) |  |
-| UserInfo | [#/components/schemas/UserInfo](#componentsschemasuserinfo) |  |
-| UserRule | [#/components/schemas/UserRule](#componentsschemasuserrule) |  |
-| UserRuleStatistic | [#/components/schemas/UserRuleStatistic](#componentsschemasuserrulestatistic) |  |
-| UserRuleStatistics | [#/components/schemas/UserRuleStatistics](#componentsschemasuserrulestatistics) |  |
-| UserRules | [#/components/schemas/UserRules](#componentsschemasuserrules) |  |
-| ValidationError | [#/components/schemas/ValidationError](#componentsschemasvalidationerror) |  |
-| VisualizerResponse | [#/components/schemas/VisualizerResponse](#componentsschemasvisualizerresponse) |  |
-| VisualizerWithPosition | [#/components/schemas/VisualizerWithPosition](#componentsschemasvisualizerwithposition) |  |
-| WalletInfo | [#/components/schemas/WalletInfo](#componentsschemaswalletinfo) |  |
-| WalletRiskScoreWithUsdtAndExchangeInfo | [#/components/schemas/WalletRiskScoreWithUsdtAndExchangeInfo](#componentsschemaswalletriskscorewithusdtandexchangeinfo) |  |
-| WalletUpdateInfo | [#/components/schemas/WalletUpdateInfo](#componentsschemaswalletupdateinfo) |  |
-| ton_aml__platform__api__v1__aml__reports__serializers__WalletRiskScore | [#/components/schemas/ton_aml__platform__api__v1__aml__reports__serializers__WalletRiskScore](#componentsschemaston_aml__platform__api__v1__aml__reports__serializers__walletriskscore) |  |
-| ton_aml__platform__api__v2__aml__reports__serializers__WalletRiskScore | [#/components/schemas/ton_aml__platform__api__v2__aml__reports__serializers__WalletRiskScore](#componentsschemaston_aml__platform__api__v2__aml__reports__serializers__walletriskscore) |  |
-| ton_aml__platform__core__command__scoring__data_models__WalletRiskScore | [#/components/schemas/ton_aml__platform__core__command__scoring__data_models__WalletRiskScore](#componentsschemaston_aml__platform__core__command__scoring__data_models__walletriskscore) |  |
-| ton_aml__platform__core__command__scoring__data_models__WalletTag | [#/components/schemas/ton_aml__platform__core__command__scoring__data_models__WalletTag](#componentsschemaston_aml__platform__core__command__scoring__data_models__wallettag) |  |
-| ton_aml__platform__core__repository__postgre_connector__data_models__WalletTag | [#/components/schemas/ton_aml__platform__core__repository__postgre_connector__data_models__WalletTag](#componentsschemaston_aml__platform__core__repository__postgre_connector__data_models__wallettag) |  |
-
-***
+`501 Not Implemented` - The server either does not recognize the request method, or it lacks the ability to fulfill the request
 
 
 

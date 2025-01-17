@@ -1,6 +1,11 @@
 ##  Authentication
 
-User authentication. Does not exceed remaining number of queries for the user
+User authentication. Does not exceed remaining number of queries for the user.
+
+```
+HTTP request header provide  with `token` in the following format:
+token: "Bearer <jwt token>"
+```
 
 ### [POST]/v1/auth/login
 
@@ -8,7 +13,7 @@ User authentication. Does not exceed remaining number of queries for the user
 
 **Request body JSON**
 
-| Parameter  | Type   | Description | Requried |
+| Parameter  | Type   | Description | Required |
 |------------|--------|-------------|----------|
 | `username` | string | email       | yes      |
 | `password` | string | password    | yes      |
@@ -55,7 +60,7 @@ User authentication. Does not exceed remaining number of queries for the user
 }
 ```
 
-| status code | type              | code | detail                   | 
+| Status code | Type              | Code | Detail                   | 
 |-------------|-------------------|------|--------------------------|
 | 401         | unauthorized      | 1005 | Invalid user credentials |
 | 422         | validation Error  |      | See below                |

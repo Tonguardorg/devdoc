@@ -5,7 +5,6 @@
 
 ```
 HTTP request header provide  with `token` in the following format:
-
 token: "Bearer <jwt token>"
 ```
 
@@ -13,12 +12,12 @@ token: "Bearer <jwt token>"
 
 **Request body JSON**
 
-| Parameter          | Type      | Description | Requried |
-|--------------------|-----------|-------------|----------|
-| `wallet_address`   | string    |             | yes      |
-| `tags`             | integer[] |             | yes      |
-| `comment`          | string    |             |          |
-| `transaction_link` | string    |             |          |
+| Parameter          | Type      | Description                                                                                          | Required |
+|--------------------|-----------|------------------------------------------------------------------------------------------------------|----------|
+| `wallet_address`   | string    | TON wallet address, bounced or non-bounced format                                                    | yes      |
+| `tags`             | integer[] | array of high-risk tags, [risk category ](../dictionary.md)                                          | yes      |
+| `comment`          | string    | comment                                                                                              | no       |
+| `transaction_link` | string    | link to transaction in https://tonviewer.com/,https://tonscan.org/,https://tonwhales.com/ru/explorer | no       |
 
 
 
@@ -37,11 +36,11 @@ token: "Bearer <jwt token>"
 
 **Content-Type** `application/json`
 
-| Parameter    | Type   | Description                     | 
-|--------------|--------|---------------------------------|
-| `uuid`       | string | t                               | 
-| `address`    | string |                                 | 
-| `created_dt` | string | '%d/%m/%Y, %H:%M:%S GMT' format | 
+| Parameter    | Type   | Description                                   | 
+|--------------|--------|-----------------------------------------------|
+| `uuid`       | string | claim id                                      | 
+| `address`    | string | TON wallet address                            | 
+| `created_dt` | string | creation date '%d/%m/%Y, %H:%M:%S GMT' format | 
 
 
 **Error codes**
@@ -66,12 +65,14 @@ token: "Bearer <jwt token>"
 **Content-Type** `application/json`
 
 **Request body**
-| Parameter          | Type      | Description | Requried |
-|--------------------|-----------|-------------|----------|
-| `uuid`   | string    |             | yes      |
-| `tags`             | integer[] |             | yes      |
-| `comment`          | string    |             |          |
-| `transaction_link` | string    |             |          |
+
+| Parameter          | Type      | Description                                                                                          | Required |
+|--------------------|-----------|------------------------------------------------------------------------------------------------------|----------|
+| `uuid`             | string    | claim id                                                                                             | yes      |
+| `tags`             | integer[] | risk category tags                                                                                   | yes      |
+| `comment`          | string    | comment                                                                                              | no       |
+| `transaction_link` | string    | link to transaction in https://tonviewer.com/,https://tonscan.org/,https://tonwhales.com/ru/explorer | no       |
+
 
  **Responses**
 
@@ -87,6 +88,9 @@ HTTP request header provide  with `token` in the following format:
 
 token: "Bearer <jwt token>"
 ```
+```
+https://my.tonguard.org/api/v1/claims/my?limit=INTEGER&offset=INTEGER&address=ADDRESS&date_from=DATE_FROM&date_to=DATE_TO&tags=INTEGER,INTEGER
+```
 
 **Parameters (Query)**
 
@@ -96,8 +100,8 @@ token: "Bearer <jwt token>"
 | `limit`     | string  | Limit of records to return                             | no       |
 | `offset`    | integer | Offset of records to return                            | no       |
 | `tags`      | integer | Limit of risk for filter                               | no       |
-| `date_from` | string  | Date from for filter                                   | no       |
-| `date_to`   | string  | Date to for filter                                     | no       |
+| `date_from` | string  | Date from for filter, 'YYYY-MM-DD' format              | no       |
+| `date_to`   | string  | Date to for filter, 'YYYY-MM-DD' format                | no       |
 
 **Responses**
 
@@ -105,15 +109,15 @@ token: "Bearer <jwt token>"
 
 **Content-Type** `application/json`
 
-| Parameter                                                                                            | Type   | Description                     | 
-|------------------------------------------------------------------------------------------------------|--------|---------------------------------|
-| `count`                                                                                              |        |                                 |
-| `uuid`                                                                                               | string | t                               | 
-| `address`                                                                                            | string |                                 | 
-| `created_dt`                                                                                         | string | '%d/%m/%Y, %H:%M:%S GMT' format | 
-| `transaction_link`                                                                                   |        |                                 |
-| `comment`                                                                                            |        |                                 |
-| `tags` <br/>`code`: `integer` <br/>`name`: `string`<br/>`type`: `enum`[INFO, RISK]<br/>`description` | string |                                 |
+| Parameter          | Type    | Description                                                                                            | 
+|--------------------|---------|--------------------------------------------------------------------------------------------------------|
+| `count`            | integer | total claims found                                                                                     |
+| `uuid`             | string  | claim id                                                                                               | 
+| `address`          | string  | TON wallet address                                                                                     | 
+| `created_dt`       | string  | '%d/%m/%Y, %H:%M:%S GMT' format                                                                        | 
+| `transaction_link` | string  | link to transaction in https://tonviewer.com/,https://tonscan.org/,https://tonwhales.com/ru/explorer   |
+| `comment`          | string  | comment                                                                                                |
+| `tags`             | string  | `code`: `integer` <br/>`name`: `string`<br/>`type`: `enum`[INFO, RISK]<br/>`description` : description |
 
 
 ***
@@ -132,9 +136,9 @@ token: "Bearer <jwt token>"
 
 **Parameters (Query)**
 
-| Parameter          | Type      | Description | Requried |
-|--------------------|-----------|-------------|----------|
-| `string`   | string    |             | yes      |
+| Parameter | Type   | Description | Required |
+|-----------|--------|-------------|----------|
+| `string`  | string | claim uuid  | yes      |
 
  **Responses**
 
@@ -161,12 +165,12 @@ token: "Bearer <jwt token>"
 
 **Content-Type** `application/json`
 
-| Parameter              | Type   | Description | 
-|------------------------|--------|-------------|
-| `code`                 |        |             |
-| `name`                 | string |             | 
-| `type`enum[INFO, RISK] | string |             | 
-| `description`          | string |             |
+| Parameter     | Type                    | Description       | 
+|---------------|-------------------------|-------------------|
+| `code`        | integer                 | tag's id          |
+| `name`        | string                  | tag's name        | 
+| `type`        | string enum[INFO, RISK] | tag's type        | 
+| `description` | string                  | tag's description |
 
 
 Risk category dictionary - [Dictionary](dictionary)
