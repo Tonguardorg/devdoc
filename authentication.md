@@ -50,42 +50,9 @@ token: "Bearer <jwt token>"
 }
 ```
 ***
+
 ### Authorization errors
 
-**Content-Type** `application/json`
-```json
-{
-  "code": "integer",
-  "detail": "string"
-}
-```
+see full specification [here ](../errors.md)
 
-| Status code | Type              | Code | Detail                   | 
-|-------------|-------------------|------|--------------------------|
-| 401         | unauthorized      | 1005 | Invalid user credentials |
-| 422         | validation Error  |      | See below                |
-| 429         | too many requests | 0    | Too Many Requests        |      
 
-***
-
-`422` **Validation Error**
-
-**Content-Type** `application/json`
-
-```json
-[
-  {
-    "type": "json_invalid",
-    "loc": [
-      "body",
-      44
-    ],
-    "msg": "JSON decode error",
-    "input": {},
-    "ctx": {
-      "error": "Invalid control character at"
-    },
-    "code": 1000
-  }
-]
-```

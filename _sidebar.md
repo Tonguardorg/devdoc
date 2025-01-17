@@ -7,3 +7,4 @@
 - [API descripton](tonguard-api)
 - [Ongoing monitoring](ongoing-monitoring)
 - [Dictionary](dictionary)
+- [Errors](errors)
