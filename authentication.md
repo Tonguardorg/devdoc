@@ -1,11 +1,6 @@
 ##  Authentication
 
-User authentication. Does not exceed remaining number of queries for the user.
-
-```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
+User authentication. Does not reduce remaining number of queries for the user.
 
 ### [POST]/v1/auth/login
 
@@ -36,14 +31,14 @@ token: "Bearer <jwt token>"
 | `token`              | string  | token                                                | 
 | `token_type`         | string  | default: JWT                                         | 
 | `expiry`             | string  | token expiry time in '%d/%m/%Y, %H:%M:%S GMT' format | 
-| `queries_count_left` | integer | Risk score queries left                              |
+| `queries_count_left` | integer | risk score queries left                              |
 
 
 **Content-Type** `application/json`
 
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDIsImVtYWlsIjoicmdheWJhZHVsbGluYUB0b25ndWFyZC5vcmciLCJuYW1lIjoiUml0YSIsInN1cm5hbWUiOiJHYXliYWR1bGxpbmEiLCJleHAiOjE3MzM5NjAxMDUsInNjb3BlcyI6WzJdLCJ0eXBlIjoiYWNjZXNzX3Rva2VuIiwicHQiOlsiLyIsIi9yaXNrLXNjb3JpbmctaGlzdG9yeSIsIi9jbGFpbSIsIi92aXN1YWxpemVyIiwiL215LWNsYWltcyIsIi9hZGRyZXNzZXMiLCIvd2hpdGVsaXN0IiwiL21lIiwiL3RvcF9ob2xkZXJzIiwiL3RvcC1hY2NvdW50cyIsIi9tb25pdG9yaW5nLXJ1bGUiXX0.xLEODITLAtMpBbOQV3B7uoHccGZkfNTb2asfMA48vfU",
+  "token": "JWT",
   "token_type": "JWT",
   "expiry": "2024-12-11T23:35:05.256362",
   "queries_count_left": 999936
