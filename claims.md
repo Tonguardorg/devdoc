@@ -92,6 +92,7 @@ HTTP request header provide  with `token` in the following format:
 
 token: "Bearer <jwt token>"
 ```
+**Example**
 
 ```
 https://my.tonguard.org/api/v1/claims/my?limit=INTEGER&offset=INTEGER&address=ADDRESS&date_from=DATE_FROM&date_to=DATE_TO&tags=INTEGER,INTEGER
