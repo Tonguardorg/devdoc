@@ -320,6 +320,7 @@ INTEGER&risk_category=INTEGER&risk=high%2Cmedium&source=api&date_from=DATE_FROM&
 HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
 ```
+**Example**
 ```
 https://api.tonguard.org/v1/reports/risk_history.csv?address=ADDRESS
 &risk_limit=INTEGER&risk_offset=INTEGER&info_category=INTEGERrisk_category=INTEGER&risk=RISK_LEVEL1,RISK_LEVEL2&source=SOURCE
@@ -355,6 +356,7 @@ https://api.tonguard.org/v1/reports/risk_history.csv?address=ADDRESS
 HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
 ```
+**Example**
 ```
 https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=UUID
 ```

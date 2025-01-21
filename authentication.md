@@ -51,3 +51,4 @@ User authentication. Does not reduce remaining number of queries for the user.
 see full specification [here ](../errors.md)
 
 
+***
