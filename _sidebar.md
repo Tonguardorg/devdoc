@@ -6,6 +6,5 @@
 - [Whitelist](whitelist.md)
 - [Top holders](top-holders.md)
 - [User](user.md)
-- [API descripton](tonguard-api)
 - [Dictionary](dictionary)
 - [Errors](errors)
