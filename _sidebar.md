@@ -7,6 +7,5 @@
 - [Top holders](top-holders.md)
 - [User](user.md)
 - [API descripton](tonguard-api)
-- [Ongoing monitoring](ongoing-monitoring)
 - [Dictionary](dictionary)
 - [Errors](errors)
