@@ -33,22 +33,22 @@ This API uses HTTP status codes to communicate with the API consumer
 | Code   | Code string                 | Detail                                                                                                        | 
 |--------|:----------------------------|---------------------------------------------------------------------------------------------------------------|
 | `0`    |                             | Too Many Requests                                                                                             |
-| `1000` | `UNBOUND_ERROR`             |                                                                                                               |
+| `1000` | `UNBOUND_ERROR`             | An unspecified or generic error occurred.                                                                     |
 | `1001` | `UNAVAILABLE`               | The service is temporarily unavailable for technical reasons.                                                 |
-| `1002` | `RATE_LIMIT_EXCEEDED`       | The limit on the number of available requests has been exhausted                                              | 
-| `1003` | `INVALID_ADDRESS`           | The address length should be 48 characters long / An invalid address was sent                                 |
-| `1004` | `AUTH_ERROR`                |                                                                                                               |
-| `1005` | `AUTH_FAILED`               | Invalid user credentials                                                                                      |
-| `1006` | `SESSION_EXPIRED`           |                                                                                                               |
-| `1007` | `AUTH_INVALID_API_KEY`      |                                                                                                               |
-| `1008` | `AUTH_API_KEY_FAILED`       |                                                                                                               |
-| `1009` | `AUTH_API_KEY_EXPIRED`      |                                                                                                               |
-| `1010` | `AUTH_API_KEY_MISSING`      |                                                                                                               |
-| `1011` | `NO_RECORDS_FOUND`          | Not found any records /Not found any history records / Not found history record/ No claims records were found |
-| `1012` | `REQUEST_VALIDATION_FAILED` |                                                                                                               |
-| `1013` | `REQUEST_PROCESSING_FAILED` |                                                                                                               |
-| `1014` | `SERVICE_MAINTENANCE_ERROR` |                                                                                                               |
-| `1015` | `INVALID_FILE_FORMAT`       |                                                                                                               |
+| `1002` | `RATE_LIMIT_EXCEEDED`       | The limit on the number of available requests has been exhausted.                                             | 
+| `1003` | `INVALID_ADDRESS`           | The address length should be 48 characters long or an invalid address was provided.                           |
+| `1004` | `AUTH_ERROR`                | A generic authorization error occurred.                                                                       |
+| `1005` | `AUTH_FAILED`               | Invalid user credentials.                                                                                     |
+| `1006` | `SESSION_EXPIRED`           | The session has expired.                                                                                      |
+| `1007` | `AUTH_INVALID_API_KEY`      | The provided API key is invalid.                                                                              |
+| `1008` | `AUTH_API_KEY_FAILED`       | The API key validation failed.                                                                                |
+| `1009` | `AUTH_API_KEY_EXPIRED`      | The API key has expired.                                                                                      |
+| `1010` | `AUTH_API_KEY_MISSING`      | The API key is missing from the request.                                                                      |
+| `1011` | `NO_RECORDS_FOUND`          | No records were found (e.g., history records, claims records).                                                |
+| `1012` | `REQUEST_VALIDATION_FAILED` | The request did not pass validation due to incorrect parameters or data.                                      |
+| `1013` | `REQUEST_PROCESSING_FAILED` | The request could not be processed due to an internal error.                                                  |
+| `1014` | `SERVICE_MAINTENANCE_ERROR` | The service is undergoing maintenance and is temporarily unavailable.                                         |
+| `1015` | `INVALID_FILE_FORMAT`       | The uploaded file format is invalid.                                                                          |
 
 
 ***
