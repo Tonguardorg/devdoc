@@ -1,6 +1,6 @@
 ##  Risk category dictionary 
 
-| code | name                   | type  | description                                                                                                          |
+| Code | Name                   | Type  | Description                                                                                                          |
 |------|------------------------|-------|----------------------------------------------------------------------------------------------------------------------|
 | 1    | 	`Dark market`         | 	RISK | 	Related to illegal trafficking, deep-web, human abuse, child pornography, weapons                                   |
 | 2    | 	`Scam`                | 	RISK | 	Related to scammers                                                                                                 |
