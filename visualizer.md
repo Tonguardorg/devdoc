@@ -40,35 +40,35 @@ https://my.tonguard.org/api/v1/visualizer/get_transactions_graph?address=ADDRESS
 
 **Content-Type** `application/json`
 
-| **Parameter**                            | **Type**                             | **Description**                               |
-|------------------------------------------|--------------------------------------|-----------------------------------------------|
-| `address`                                | `string`                             | TON wallet address                            |
-| **`nodes`**                              |                                      | graph nodes object                            |
-| └ `id`                                   | `string`                             | TON wallet address                            |
-| └ `alias`                                | `string (optional)`                  | default: null                                 |
-| └ `name`                                 | `string`                             | TON wallet address                            |
-| └ `type`                                 | `enum[input, output, custom]`        | type: `input`, `output`, `custom`             |
-| └ `label`                                | `string`                             | TON wallet address                            |
-| └ **`data`**                             | `object`                             | wallets extra data                            |
-| &nbsp;&nbsp; └ `owner`                   | `string (optional)`                  | owner's public name, default: unknown         |
-| &nbsp;&nbsp; └ `incoming_transactions`   | `integer (optional)`                 | number of incoming transactions               |
-| &nbsp;&nbsp; └ `outgoing_transactions`   | `integer (optional)`                 | number of outgoing transactions               |
-| &nbsp;&nbsp; └ `balance`                 | `number (optional)`                  | current balance of the wallet                 |
-| &nbsp;&nbsp; └ `turnover`                | `number (optional)`                  | current turnover of the wallet                |
-| &nbsp;&nbsp; └ `report`                  | `object`                             | report data                                   |
-| &nbsp;&nbsp;&nbsp;&nbsp; └ `fraud_level` | `string (optional)`                  | fraud level: high,medium,low,lowest,unknown   |
-| &nbsp;&nbsp;&nbsp;&nbsp; └ `risk_score`  | `integer (optional)`                 | last risk score value                         |
-| **`edges`**                              |                                      |                                               |
-| └ `id`                                   | `Partial(integer) & Partial(string)` | edge id                                       |
-| └ `created_dt`                           | `string (optional)`                  | creation date '%d/%m/%Y, %H:%M:%S GMT' format |
-| └ `source`                               | `string (optional)`                  | source address of the cryptocurrency funds    |
-| └ `target`                               | `string (optional)`                  | target address of the cryptocurrency funds    |
-| └ `label`                                | `Partial(number) & Partial(number)`  | text transaction sum                          |
-| └ `value`                                | `Partial(number) & Partial(number)`  | transaction sum                               |
-| └ `logical_time`                         | `integer (optional)`                 | unix time                                     |
-| └ `transaction_hash`                     | `string (optional)`                  | transaction hash                              |
-| └ `forward_fee`                          | `integer (optional)`                 | transaction fee                               |
-| `action`                                 | `string (optional)`                  | view                                          |
+| **Parameter**                            | **Type**                           | **Description**                               |
+|------------------------------------------|------------------------------------|-----------------------------------------------|
+| `address`                                | string                             | TON wallet address                            |
+| **`nodes`**                              |                                    | graph nodes object                            |
+| └ `id`                                   | string                             | TON wallet address                            |
+| └ `alias`                                | string (optional)                  | default: null                                 |
+| └ `name`                                 | string                             | TON wallet address                            |
+| └ `type`                                 | enum[input, output, custom]        | type: `input`, `output`, `custom`             |
+| └ `label`                                | string                             | TON wallet address                            |
+| └ **`data`**                             | object                             | wallets extra data                            |
+| &nbsp;&nbsp; └ `owner`                   | string (optional)                  | owner's public name, default: unknown         |
+| &nbsp;&nbsp; └ `incoming_transactions`   | integer (optional)                 | number of incoming transactions               |
+| &nbsp;&nbsp; └ `outgoing_transactions`   | integer (optional)                 | number of outgoing transactions               |
+| &nbsp;&nbsp; └ `balance`                 | number (optional)                  | current balance of the wallet                 |
+| &nbsp;&nbsp; └ `turnover`                | number (optional)                  | current turnover of the wallet                |
+| &nbsp;&nbsp; └ `report`                  | object                             | report data                                   |
+| &nbsp;&nbsp;&nbsp;&nbsp; └ `fraud_level` | string (optional)                  | fraud level: high,medium,low,lowest,unknown   |
+| &nbsp;&nbsp;&nbsp;&nbsp; └ `risk_score`  | integer (optional)                 | last risk score value                         |
+| **`edges`**                              |                                    |                                               |
+| └ `id`                                   | Partial(integer) & Partial(string) | edge id                                       |
+| └ `created_dt`                           | string (optional)                  | creation date '%d/%m/%Y, %H:%M:%S GMT' format |
+| └ `source`                               | string (optional)                  | source address of the cryptocurrency funds    |
+| └ `target`                               | string (optional)                  | target address of the cryptocurrency funds    |
+| └ `label`                                | Partial(number) & Partial(number)  | text transaction sum                          |
+| └ `value`                                | Partial(number) & Partial(number)  | transaction sum                               |
+| └ `logical_time`                         | integer (optional)                 | unix time                                     |
+| └ `transaction_hash`                     | string (optional)                  | transaction hash                              |
+| └ `forward_fee`                          | integer (optional)                 | transaction fee                               |
+| `action`                                 | string (optional)                  | view                                          |
 
 ```json
 {
@@ -184,7 +184,7 @@ https://my.tonguard.org/v1/visualizer/update_transactions_graph?address=ADDRESS&
 | Parameter  | Type    | Description                                                                                                        | Required |
 |------------|---------|--------------------------------------------------------------------------------------------------------------------|----------|
 | `address`  | string  | TON wallet address in any base64 form (urlsafe or not). Accepts both address types - bounceable and non-bounceable | yes      |
-| `graph_id` | integer |                                                                                                                    | no       |
+| `graph_id` | integer | graph id                                                                                                           | no       |
 
 **Request body Json**
 **You have to send parameters as in response** [[GET]/v1/visualizer/get_transactions_graph](#getv1visualizerget_transactions_graph)

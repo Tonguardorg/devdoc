@@ -27,16 +27,16 @@ Set up notify, use urlencoded parameters
 
 **Example**
 ```
-https://my.tonguard.org/v1/monitoring/notify_setting?notify_url=URL&email=EMAIL,EMAIL1
+https://my.tonguard.org/v1/monitoring/notify_setting?notify_url=URL&email=EMAIL
 ```
 
 **Query parameters**
 
-| Parameter    | Type     | Description                                       | Required                                 |
-|--------------|----------|---------------------------------------------------|------------------------------------------|
-| `notify_url` | string   | TON wallet address, bounced or non-bounced format | either email or url is required, or both |
-| `email`      | string[] | array of emails                                   | either email or url is required, or both |
- 
+| Parameter    | Type   | Description                                       | Required                                 |
+|--------------|--------|---------------------------------------------------|------------------------------------------|
+| `notify_url` | string | TON wallet address, bounced or non-bounced format | either email or url is required, or both |
+| `email`      | string | emails                                            | either email or url is required, or both |
+
 **Responses**
 
 `201` **Successful Response**
