@@ -1,3 +1,4 @@
+- [Customer API](customerapi.md)
 - [Authentication](authentication)
 - [Reports](reports)
 - [Claims](claims)

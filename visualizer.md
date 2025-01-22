@@ -3,6 +3,9 @@
 * Intelligently search for potentially risky transactions
 * Facilitate transactional investigations
 
+`User can send requests to the visualizer only if he has at least one available request. 
+If all requests are used up, access to the visualizer will be restricted until additional requests are allocated.`
+
 **Reminder**
 ```
 HTTP request header provide  with `token` in the following format:

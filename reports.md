@@ -16,6 +16,9 @@ Probabilities are converted into risk levels, which can take one of four values:
 * high risk (82 – 100), 
 * wallets with no clear activity may be classified as Unknown
 
+`User may access the risk scoring only if he has at least one available request remaining. 
+Once all requests are exhausted, access to the visualizer will be temporarily restricted until additional requests are replenished.`
+
 ### [GET]/v2/reports/wallet_risk_score
 **Risk score, risk level and query related info**
 
