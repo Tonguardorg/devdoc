@@ -400,3 +400,34 @@ https://api.tonguard.org/v1/reports/risk_scoring_report_UUID.pdf
 
 ***
 
+### [POST]/v2/reports/bulk_wallet_fraud_score
+
+Returns address risk score, risk level and query related info for multiple addresses (bulk request). Maximum 100 address in one request. 
+
+```
+https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score&source=SOURCE
+```
+
+**Parameters (Query)**
+
+| Parameter | Type   | Description              | Required |
+|-----------|--------|--------------------------|----------|
+| `source`  | string | api/manual, default: api | no       |
+
+**Request body**
+
+| Parameter | Type   | Description                                            | Required |
+|-----------|--------|--------------------------------------------------------|----------|
+|           | string | TON wallet address in any base64 form (urlsafe or not) | yes      |
+
+```json
+[
+  "EQAU2bNfz8E-YRLZozcrLVr-JeUqZmdQWoUt01IsYaykGlWS",
+  "EQA3_TOT0UZzI43yBSfbv1KSnT9qutqbrOyGlIy4mubyRkX7"
+]
+
+```
+
+**Responses**
+
+see [Wallet Risk Score](#getv2reportswallet_risk_score)
