@@ -1,4 +1,5 @@
 - [Customer API](customerapi)
+- [API Overview](api)
 - [Authorization](authorization)
 - [Reports](reports)
 - [Claims](claims)
@@ -7,5 +8,6 @@
 - [Whitelist](whitelist)
 - [Top holders](top-holders)
 - [User](user)
+- [Organizations](organizations)
 - [Dictionary](dictionary)
 - [Errors](errors)
