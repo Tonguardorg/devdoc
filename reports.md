@@ -57,6 +57,7 @@ https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADRESS
 | `risk_score`                                | integer   | risk score level (0-100)                                                                                                                                                                                                 |
 | `fraud_level`                               | enum      | risk levelss: <br/>* lowest risk (0 - 12),<br/>* low risk (12 - 46), <br/>* medium risk (46 – 82), <br/>* high risk (82 – 100), <br/> * wallets with no clear activity may beclassified as Unknown. <br/>Default: lowest |                    
 | `risk_category`                             | string [] | `code`: `integer` <br/>`name`: `string`<br/>`type`: `enum`[INFO, RISK]<br/>`description` : description <br/>[risk category ](../dictionary.md)                                                                           |
+| `info_category`                             | string [] | `code`: `integer` <br/>`name`: `string`<br/>`type`: `enum`[INFO, RISK]<br/>`description` : description <br/>[info category ](../dictionary.md)                                                                           |
 | `total_days`                                | integer   | the number of days the address has existed since the first transaction with the analyzed address                                                                                                                         |
 | `first_transaction_time`                    | string    | date of the first analyzed transaction                                                                                                                                                                                   |
 | `last_transaction_time`                     | string    | date of the last analyzed transaction                                                                                                                                                                                    |
@@ -78,12 +79,15 @@ https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADRESS
 | `stacking_wallet_status`                    | string[]  | this field is not currently in use                                                                                                                                                                                       |
 | `miner_wallet_status`                       | string[]  | this field is not currently in use                                                                                                                                                                                       |
 | `nft_wallet_status`                         | string[]  | this field is not currently in use                                                                                                                                                                                       |
-| `total_usdt_transactions_amount`            | number    | USDT jettons transactions balance recalculated to USD at the current rate                                                                                                                                                |
-| `usdt_balance`                              | number    | current balance and turnover of USDT jettons for the analyzed address                                                                                                                                                    |
+| `total_jetton_transactions_amount`          | number    | USDT jettons transactions balance recalculated to USD at the current rate                                                                                                                                                |
+| `jetton_balance`                            | number    | current balance and turnover of USDT jettons for the analyzed address                                                                                                                                                    |
 | `total_balance_in_usd`                      | number    | USDT jettons balance recalculated to USD **at the current rate**                                                                                                                                                         |
 | `total_transactions_amount_in_usd`          | number    | USDT jettons transactions balance recalculated to USD **at the current rate**                                                                                                                                            |
 | `total_received_transactions_amount_in_usd` | number    | USDT jettons received balance recalculated to USD **at the current rate**                                                                                                                                                |
 | `total_sent_transactions_amount_in_usd`     | number    | USDT jettons sent balance recalculated to USD **at the current rate**                                                                                                                                                    |
+| `risky_connections`                         | array     | Array of risky connections with other addresses. Each connection contains:<br/>- `last_transaction_time`: string<br/>- `wallet_address`: string<br/>- `neighbor_wallet_address`: string<br/>- `total_income`: integer<br/>- `total_outcome`: integer<br/>- `risk_score`: integer<br/>- `fraud_level`: string<br/>- `total_transactions_count`: integer<br/>- `total_transactions_amount`: string<br/>- `tags`: array |
+| `source_of_funds`                           | array     | Array of fund sources. Each source contains:<br/>- `category`: string<br/>- `percentage`: number<br/>- `total_input_ton`: number<br/>- `total_input_usdt`: number |
+| `jettons_info`                              | array     | Array of jetton information. Each jetton contains:<br/>- `jetton_address`: string<br/>- `name`: string<br/>- `symbol`: string<br/>- `description`: string<br/>- `balance`: number<br/>- `balance_in_ton`: number<br/>- `balance_in_usd`: number<br/>- `turnover`: number<br/>- `turnover_in_ton`: number<br/>- `turnover_in_usd`: number<br/>- `transactions_count`: integer<br/>- `counterparts_count`: integer<br/>- `received_counterparts_count`: integer<br/>- `sent_counterparts_count`: integer<br/>- `received_transactions_count`: integer<br/>- `sent_transactions_count`: integer<br/>- `first_transaction_time`: string<br/>- `last_transaction_time`: string |
 
 
 
@@ -134,7 +138,30 @@ https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADRESS
     "Linked OKX",
     "Linked EXMO deposit"
   ],
-  "stacking_wallet_status": []
+  "stacking_wallet_status": [],
+  "risky_connections": [
+    {
+      "last_transaction_time": "2022-02-02T11:00:40",
+      "wallet_address": "0:618495d923c3557894935e13903db85e2649d545a0aa390bbd807ae82b452ed4",
+      "neighbor_wallet_address": "EQCi3YNrsfLbf29nErUfdbFViDFqr/Cpvy68THMtWZiIr31u",
+      "total_income": null,
+      "total_outcome": null,
+      "risk_score": 81,
+      "fraud_level": "high",
+      "total_transactions_count": 1,
+      "total_transactions_amount": "1.0000000000000005e-09",
+      "tags": [
+        {
+          "code": 20,
+          "name": "Spam",
+          "type": "RISK",
+          "description": "Related to spammers"
+        }
+      ]
+    }
+  ],
+  "source_of_funds": [],
+  "jettons_info": []
 }
 ```
 
@@ -405,7 +432,7 @@ https://api.tonguard.org/v1/reports/risk_scoring_report_UUID.pdf
 Returns address risk score, risk level and query related info for multiple addresses (bulk request). Maximum 100 address in one request. 
 
 ```
-https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score&source=SOURCE
+https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
 ```
 
 **Parameters (Query)**
@@ -430,4 +457,9 @@ https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score&source=SOURCE
 
 **Responses**
 
-see [Wallet Risk Score](#getv2reportswallet_risk_score)
+| Parameter | Type   | Description                                            |
+|-----------|--------|--------------------------------------------------------|
+| `count`   | integer| Number of addresses processed                          |
+| `data`    | array  | Array of risk scores for each address in bulk request  |
+
+Each item in the `data` array contains the same fields as the response from `/v2/reports/wallet_risk_score`

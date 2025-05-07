@@ -74,5 +74,94 @@ the API usage rules. Instead, store the token securely and reuse it for all requ
 ## Refreshing the Token
 When the token expires, you can request a new one.
 
+### [POST]/v2/login
+**Login to the system**
+
+**Example**
+```
+https://api.tonguard.org/v2/login
+```
+
+**Content-Type** `application/json`
+
+**Request Body**
+
+| Parameter   | Type   | Description                | Required |
+|-------------|--------|----------------------------|----------|
+| `email`     | string | user email                 | yes      |
+| `password`  | string | user password              | yes      |
+
+**Responses**
+
+| Parameter | Type   | Description                |
+|-----------|--------|----------------------------|
+| `token`   | string | JWT token for authorization|
+
+### [POST]/v2/reset-password/email
+**Send password reset email**
+
+**Example**
+```
+https://api.tonguard.org/v2/reset-password/email
+```
+
+**Content-Type** `application/json`
+
+**Request Body**
+
+| Parameter | Type   | Description                | Required |
+|-----------|--------|----------------------------|----------|
+| `email`   | string | user email                 | yes      |
+
+**Responses**
+
+| Parameter | Type    | Description                |
+|-----------|---------|----------------------------|
+| `success` | boolean | Whether email was sent     |
+
+### [POST]/v2/reset-password/check-token
+**Check if reset token is valid**
+
+**Example**
+```
+https://api.tonguard.org/v2/reset-password/check-token
+```
+
+**Content-Type** `application/json`
+
+**Request Body**
+
+| Parameter | Type   | Description                | Required |
+|-----------|--------|----------------------------|----------|
+| `token`   | string | Reset token from email     | yes      |
+
+**Responses**
+
+| Parameter | Type    | Description                |
+|-----------|---------|----------------------------|
+| `valid`   | boolean | Whether token is valid     |
+
+### [POST]/v2/reset-password/change-password
+**Change password using reset token**
+
+**Example**
+```
+https://api.tonguard.org/v2/reset-password/change-password
+```
+
+**Content-Type** `application/json`
+
+**Request Body**
+
+| Parameter    | Type   | Description                | Required |
+|--------------|--------|----------------------------|----------|
+| `token`      | string | Reset token from email     | yes      |
+| `password`   | string | New password               | yes      |
+
+**Responses**
+
+| Parameter | Type    | Description                |
+|-----------|---------|----------------------------|
+| `success` | boolean | Whether password was changed|
 
 ***
