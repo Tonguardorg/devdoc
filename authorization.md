@@ -1,4 +1,4 @@
-##  Authorization
+## Authorization
 
 User authorization. **Does not reduce** remaining number of queries for the user.
 
@@ -16,14 +16,14 @@ Below is an example request for obtaining a token:
 | Parameter  | Type   | Description | Required |
 |------------|--------|-------------|----------|
 | `username` | string | email       | yes      |
-| `password` | string | password    | yes      |
+| `password` | string | password    | no       |
 
 **Request**
 
 ```json
 {
-  "login": "user@example.com",
-  "password": "string"
+  "username": "johnsmith@tonguard.org",
+  "password": "ToNloveR2000"
 }
 ```
 
@@ -53,6 +53,40 @@ Below is an example request for obtaining a token:
 | `visualizer_queries_count_left`   | integer | visualizer queries left                              |
 | `monitoring_addresses_count_left` | integer | monitoring addresses left                            |
 
+### [POST]/v1/auth/token
+
+OAuth2 compatible token endpoint. Use for Swagger UI login form and SDK authentication.
+
+**Content-Type** `application/x-www-form-urlencoded`
+
+**Request Body**
+
+| Parameter      | Type   | Description                | Required |
+|----------------|--------|----------------------------|----------|
+| `grant_type`   | string | Must be "password"         | yes      |
+| `username`     | string | User email                 | yes      |
+| `password`     | string | User password              | yes      |
+| `scope`        | string | OAuth2 scope               | no       |
+| `client_id`    | string | OAuth2 client ID           | no       |
+| `client_secret`| string | OAuth2 client secret       | no       |
+
+**Responses**
+
+`200` **Returns OAuth2 token response**
+
+**Content-Type** `application/json`
+
+```json
+{
+  "access_token": "string",
+  "token_type": "bearer",
+  "expiry": "2025-01-28T07:57:37.892Z",
+  "risk_queries_count_left": 0,
+  "visualizer_queries_count_left": 0,
+  "monitoring_addresses_count_left": 0
+}
+```
+
 ***
 
 ### Authorization errors
@@ -71,61 +105,26 @@ token: "Bearer <jwt token>"
 **Do not request a token for every API call**. This is redundant and may result in your account being blocked for violating 
 the API usage rules. Instead, store the token securely and reuse it for all requests until it expires (`expires_in`).
 
-## Refreshing the Token
-When the token expires, you can request a new one.
-
-### [POST]/v2/login
-**Login to the system**
-
-**Example**
-```
-https://api.tonguard.org/v2/login
-```
-
-**Content-Type** `application/json`
-
-**Request Body**
-
-| Parameter   | Type   | Description                | Required |
-|-------------|--------|----------------------------|----------|
-| `email`     | string | user email                 | yes      |
-| `password`  | string | user password              | yes      |
-
-**Responses**
-
-| Parameter | Type   | Description                |
-|-----------|--------|----------------------------|
-| `token`   | string | JWT token for authorization|
+## Password Reset Flow
 
 ### [POST]/v2/reset-password/email
 **Send password reset email**
 
-**Example**
-```
-https://api.tonguard.org/v2/reset-password/email
-```
-
 **Content-Type** `application/json`
 
 **Request Body**
 
-| Parameter | Type   | Description                | Required |
-|-----------|--------|----------------------------|----------|
-| `email`   | string | user email                 | yes      |
+| Parameter         | Type   | Description                | Required |
+|-------------------|--------|----------------------------|----------|
+| `email`           | string | User email                 | yes      |
+| `recaptcha_token` | string | reCAPTCHA verification token| yes      |
 
 **Responses**
 
-| Parameter | Type    | Description                |
-|-----------|---------|----------------------------|
-| `success` | boolean | Whether email was sent     |
+`200` **Success**
 
 ### [POST]/v2/reset-password/check-token
 **Check if reset token is valid**
-
-**Example**
-```
-https://api.tonguard.org/v2/reset-password/check-token
-```
 
 **Content-Type** `application/json`
 
@@ -137,17 +136,10 @@ https://api.tonguard.org/v2/reset-password/check-token
 
 **Responses**
 
-| Parameter | Type    | Description                |
-|-----------|---------|----------------------------|
-| `valid`   | boolean | Whether token is valid     |
+`200` **Success**
 
 ### [POST]/v2/reset-password/change-password
 **Change password using reset token**
-
-**Example**
-```
-https://api.tonguard.org/v2/reset-password/change-password
-```
 
 **Content-Type** `application/json`
 
@@ -160,8 +152,4 @@ https://api.tonguard.org/v2/reset-password/change-password
 
 **Responses**
 
-| Parameter | Type    | Description                |
-|-----------|---------|----------------------------|
-| `success` | boolean | Whether password was changed|
-
-***
+`200` **Success**

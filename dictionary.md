@@ -1,21 +1,72 @@
-##  Risk category dictionary 
+## Справочники
 
-| Code | Name                   | Type  | Description                                                                                                          |
-|------|------------------------|-------|----------------------------------------------------------------------------------------------------------------------|
-| 1    | 	`Dark market`         | 	RISK | 	Related to illegal trafficking, deep-web, human abuse, child pornography, weapons                                   |
-| 2    | 	`Scam`                | 	RISK | 	Related to scammers                                                                                                 |
-| 3    | 	`Mixer`               | 	RISK | 	Related to mixing, layering and cleaning dirty transactions                                                         |
-| 5    | 	`Terrorism financing` | 	RISK | 	Related to terrorism financing                                                                                      |
-| 6    | 	`Money laundering`    | 	RISK | 	Related to money laundering                                                                                         |
-| 7    | 	`Ransom`              | 	RISK | 	Related to blackmail, ransomware, extorsion                                                                         |
-| 8    | 	`Bank card fraud`     | 	RISK | 	Related to carders, unauthorized purchases, stolen accounts, identity theft                                         |
-| 9    | 	`Malware`             | 	RISK | 	Related to bulk generation of Telegram accounts which caused harm to the service (air-drops, hacking by bots, etc.) |
-| 10   | 	`Sanctions`           | 	RISK | 	Related to sanctions                                                                                                |
-| 11   | 	`Hacking`             | 	RISK | 	Related to hackers                                                                                                  |
-| 19   | 	`Drugs`               | 	RISK | 	Related to drugs trade                                                                                              |
-| 20   | 	`Spam`                | 	RISK | 	Related to spammers                                                                                                 |
-| 21   | 	`Exchange`            | 	INFO | 	Related to decentralized exchange                                                                                   |
-| 22   | 	`Custody wallet`      | 	INFO | Related to crypto services                                                                                           |
+### Категории рисков
 
+| Код | Название                | Тип   | Описание                                                                                                          |
+|-----|-------------------------|-------|------------------------------------------------------------------------------------------------------------------|
+| 1   | `Dark market`          | RISK  | Связано с незаконной торговлей, даркнетом, эксплуатацией людей, детской порнографией, оружием                    |
+| 2   | `Scam`                 | RISK  | Связано с мошенниками                                                                                            |
+| 3   | `Mixer`                | RISK  | Связано с микшированием, наслоением и очисткой грязных транзакций                                                 |
+| 5   | `Terrorism financing`  | RISK  | Связано с финансированием терроризма                                                                             |
+| 6   | `Money laundering`     | RISK  | Связано с отмыванием денег                                                                                       |
+| 7   | `Ransom`               | RISK  | Связано с шантажом, вымогательством                                                                              |
+| 8   | `Bank card fraud`      | RISK  | Связано с кардерами, несанкционированными покупками, украденными аккаунтами, кражей личных данных                |
+| 9   | `Malware`              | RISK  | Связано с массовой генерацией аккаунтов Telegram, причинивших вред сервису (аирдропы, взлом ботами и т.д.)       |
+| 10  | `Sanctions`            | RISK  | Связано с санкциями                                                                                              |
+| 11  | `Hacking`              | RISK  | Связано с хакерами                                                                                               |
+| 19  | `Drugs`                | RISK  | Связано с торговлей наркотиками                                                                                  |
+| 20  | `Spam`                 | RISK  | Связано со спамерами                                                                                             |
+| 21  | `Exchange`             | INFO  | Связано с децентрализованной биржей                                                                              |
+| 22  | `Custody wallet`       | INFO  | Связано с крипто-сервисами                                                                                       |
+| 23  | `Gambling`             | RISK  | Связано с азартными играми                                                                                       |
+| 24  | `Ponzi`                | RISK  | Связано с финансовыми пирамидами                                                                                 |
+| 25  | `Fake ICO`             | RISK  | Связано с фейковыми ICO                                                                                          |
+| 26  | `Fake NFT`             | RISK  | Связано с фейковыми NFT                                                                                          |
+| 27  | `Fake Airdrop`         | RISK  | Связано с фейковыми аирдропами                                                                                   |
+| 28  | `Fake Mining`          | RISK  | Связано с фейковым майнингом                                                                                     |
+| 29  | `Fake Staking`         | RISK  | Связано с фейковым стейкингом                                                                                    |
+| 30  | `Fake Yield Farming`   | RISK  | Связано с фейковым yield farming                                                                                 |
+| 31  | `Fake DeFi`            | RISK  | Связано с фейковыми DeFi проектами                                                                               |
+| 32  | `Fake Wallet`          | RISK  | Связано с фейковыми кошельками                                                                                   |
+| 33  | `Fake Exchange`        | RISK  | Связано с фейковыми биржами                                                                                      |
+| 34  | `Fake DEX`             | RISK  | Связано с фейковыми DEX                                                                                          |
+| 35  | `Fake Bridge`          | RISK  | Связано с фейковыми мостами                                                                                      |
+| 36  | `Fake Lending`         | RISK  | Связано с фейковыми кредитными платформами                                                                       |
+| 37  | `Fake Insurance`       | RISK  | Связано с фейковыми страховыми платформами                                                                       |
+| 38  | `Fake Prediction`      | RISK  | Связано с фейковыми платформами предсказаний                                                                     |
+| 39  | `Fake Lottery`         | RISK  | Связано с фейковыми лотереями                                                                                    |
+| 40  | `Fake Marketplace`     | RISK  | Связано с фейковыми маркетплейсами                                                                               |
 
-***
+### Уровни риска
+
+| Уровень риска | Описание                                                                 |
+|---------------|--------------------------------------------------------------------------|
+| `lowest`      | Наименьший риск                                                          |
+| `low`         | Низкий риск                                                              |
+| `medium`      | Средний риск                                                             |
+| `high`        | Высокий риск                                                             |
+| `unknown`     | Неизвестная активность (недостаточно данных для определения уровня риска) |
+
+### Статусы транзакций
+
+| Статус        | Описание                    |
+|---------------|-----------------------------|
+| `success`     | Успешная транзакция        |
+| `failed`      | Неуспешная транзакция      |
+| `pending`     | Транзакция в обработке     |
+| `unknown`     | Неизвестный статус         |
+
+### Типы транзакций
+
+| Тип           | Описание                    |
+|---------------|-----------------------------|
+| `transfer`    | Перевод токенов            |
+| `swap`        | Обмен токенов              |
+| `stake`       | Стейкинг                   |
+| `unstake`     | Вывод из стейкинга         |
+| `claim`       | Получение наград           |
+| `mint`        | Минтинг NFT                |
+| `burn`        | Сжигание токенов           |
+| `other`       | Другие типы транзакций     |
+
+**Error codes** see full specification [here](../errors.md)
