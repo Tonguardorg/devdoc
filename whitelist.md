@@ -1,70 +1,64 @@
-## Whitelist
-Upload and download wallets in your whitelist. 
+# Whitelist Management
+Management of TON addresses whitelist.
 
-Custom whitelisting in AML compliance involves creating a list of entities or individuals that are classified as trusted or verified, exempting them from certain scrutiny processes. 
-These entities are added to the whitelist only after a thorough due diligence process, ensuring they pose minimal risk of involvement in money laundering or other
-financial crimes. 
+### [GET]/v1/whitelists/whitelist
+Get whitelist
 
-The main objective of custom whitelisting is to minimize false positives in risk assessments and streamline the compliance process.
-When a wallet is included in the custom whitelist, its risk level in the risk assessment process is automatically reduced to a low level.
-
-### [GET]/v1/whitelists/whitelist.csv
-
-Method is used to **download whitelist as a file**
+**Content-Type** `application/json`
 
 ```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
-**Example**
-```
-https://my.tonguard.org/v1/whitelists/whitelist.csv
+https://api.tonguard.org/v1/whitelists/whitelist
 ```
 
 **Responses**
 
-`200` **Data successfully downloaded**
+`200` **Success**
 
 **Content-Type** `application/json`
 
 ```json
 {
-  "title": "Response Download"
+  "count": 0,
+  "results": [
+    {
+      "id": 0,
+      "address": "string",
+      "created_dt": "string"
+    }
+  ]
 }
 ```
 
-**Error codes** see full specification [here ](../errors.md)
+### [DELETE]/v1/whitelists/whitelist_entity
+Delete address from whitelist
 
-***
-
-
-### [POST]/v1/whitelists/whitelist.csv
-Method is used to **upload whitelist data**
+**Content-Type** `application/json`
 
 ```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
+https://api.tonguard.org/v1/whitelists/whitelist_entity
 ```
 
+**Request parameters (Query)**
+
+| Parameter | Type   | Description                | Required |
+|-----------|--------|----------------------------|----------|
+| `address` | string | TON wallet address        | yes      |
+
+**Responses**
+
+`204` **Success**
+
+### [GET]/v1/whitelists/whitelist.csv
+Download whitelist as CSV
+
+**Content-Type** `application/json`
+
 ```
-{
-  // CSV file containing whitelist data.
-  file: string
-}
+https://api.tonguard.org/v1/whitelists/whitelist.csv
 ```
 
 **Responses**
 
-`200` **Data successfully uploaded**
+`200` **Success**
 
-**Content-Type** `application/json` 
-
-```
-{
-  "title": "Response Upload"
-}
-```
-
-**Error codes** see full specification [here ](../errors.md)
-
-***
+**Content-Type** `text/csv`

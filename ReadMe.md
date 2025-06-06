@@ -1,22 +1,23 @@
-# Добро пожаловать в документацию проекта
+# Welcome to the Project Documentation
 
-Этот проект использует [Docsify](https://docsify.js.org/) для создания и отображения документации. 
-Ниже приведены основные инструкции для работы с документацией.
+This project uses [Docsify](https://docsify.js.org/) to create and display documentation.
+
+Below are the main instructions for working with the documentation.
 
 ---
 
-## Как запустить локальный сервер
+## How to Run Local Server
 
-1. Убедитесь, что установлен Node.js и Doxify. Если у вас еще не установлен Node.js, скачайте и установите его.
-Затем выполните команду для глобальной установки Doxify:
+1. Ensure that Node.js and Doxify are installed. If Node.js is not installed, download and install it.
+Then execute the command to install Doxify globally:
 ```bash
 npm install -g docsify-cli
 ```
-2. Перейдите в папку проекта.
-3. Выполните команду:
+2. Navigate to the project folder.
+3. Execute the command:
    ```bash
    docsify serve
    ```
-4. Откройте браузер и перейдите по адресу http://localhost:3000.
+4. Open your browser and navigate to http://localhost:3000.
 
 

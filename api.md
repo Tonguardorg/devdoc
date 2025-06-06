@@ -2,7 +2,7 @@
 
 ## Overview
 
-This API provides risk score and risk level estimation for TON blockchain addresses.
+This API provides risk score and risk level estimation for TON blockchain addresses and etc 🚀
 
 ## Base URL
 
@@ -12,13 +12,28 @@ https://api.tonguard.org/
 
 ## Authentication
 
-All API requests require authentication using JWT tokens.
+All API requests require authentication using JWT tokens. First you retrieve a new JWT token using login/password authentication. After that you can use it to access other resources.
+
+## Status Codes
+
+This API uses HTTP status codes to communicate with the API consumer:
+
+- `200 OK` - Response to a successful GET, PUT, PATCH or DELETE
+- `201 Created` - Response to a POST that results in a creation
+- `400 Bad Request` - Malformed request; request body validation errors
+- `401 Unauthorized` - When no or invalid authentication details are provided
+- `403 Forbidden` - When authentication succeeded but authenticated user doesn't have access to the resource
+- `428 Requests Limit Reached` - When user reached his predefined maximum amount of requests
+- `429 Rate Limit Exceeded` - When calls to certain endpoint for user are higher than predefined limits
+- `500 Server Error` - Something went wrong on the API end
+- `501 Not Implemented` - The server either does not recognize the request method, or it lacks the ability to fulfill the request
 
 ## Endpoints
 
 ### Reports
 
-- [GET] `/v2/reports/wallet_risk_score` - Get wallet risk score
+- [GET] `/v2/reports/wallet_risk_score` - Get wallet risk score (including USDT information)
+- [POST] `/v2/reports/bulk_wallet_fraud_score` - Get risk scores for multiple addresses
 - [GET] `/v1/reports/risk_scoring_history` - Get risk scoring history
 - [GET] `/v1/reports/risk_scoring_report` - Get risk scoring report
 - [GET] `/v1/reports/risk_scoring_report_{uuid}.pdf` - Download report as PDF
@@ -38,8 +53,9 @@ All API requests require authentication using JWT tokens.
 - [GET] `/v1/visualizer/get_transactions_graph` - Get transactions graph
 - [GET] `/v1/visualizer/get_last_transactions_graph` - Get last transactions graph
 - [PUT] `/v1/visualizer/update_transactions_graph` - Update transactions graph
-- [GET] `/v1/visualizer/get_visualizer_history` - Get addresses history
-- [GET] `/v1/visualizer/get_transactions_graph_by_id` - Get graph by ID
+- [GET] `/v1/visualizer/get_visualizer_history` - Get visualizer history
+- [GET] `/v1/visualizer/get_transactions_graph_by_uuid` - Get graph by UUID
+- [DELETE] `/v1/visualizer/delete_transactions_graph` - Delete transactions graph
 
 ### Monitoring
 
@@ -56,6 +72,8 @@ All API requests require authentication using JWT tokens.
 
 ### Whitelists
 
+- [GET] `/v1/whitelists/whitelist` - Get whitelist
+- [DELETE] `/v1/whitelists/whitelist_entity` - Delete address from whitelist
 - [GET] `/v1/whitelists/whitelist.csv` - Download whitelist as CSV
 - [POST] `/v1/whitelists/whitelist.csv` - Upload whitelist data
 
@@ -69,7 +87,8 @@ All API requests require authentication using JWT tokens.
 
 ### Authentication
 
-- [POST] `/v1/auth/login` - User authentication
+- [POST] `/v1/auth/login` - User authentication (JSON)
+- [POST] `/v1/auth/token` - OAuth2 compatible token endpoint
 - [POST] `/v2/reset-password/email` - Reset email
 - [POST] `/v2/reset-password/check-token` - Check token
-- [POST] `/v2/reset-password/change-password` - Change password 
+- [POST] `/v2/reset-password/change-password` - Change password
