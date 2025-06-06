@@ -12,13 +12,13 @@ HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
 ```
 
-### [GET]/v2/visualizer/get_transactions_graph
+### [GET]/v1/visualizer/get_transactions_graph
 Method is used to create graph
 
 **Content-Type** `application/json`
 
 ```
-https://api.tonguard.org/v2/visualizer/get_transactions_graph?address=ADDRESS&limit=INTEGER&action=ACTION&risk=RISK&date_from=DATE_FROM&date_to=DATE_TO
+https://api.tonguard.org/v1/visualizer/get_transactions_graph?address=ADDRESS&limit=INTEGER&action=ACTION&risk=RISK&date_from=DATE_FROM&date_to=DATE_TO
 ```
 
 **Request parameters (Query)**
@@ -79,13 +79,13 @@ https://api.tonguard.org/v2/visualizer/get_transactions_graph?address=ADDRESS&li
 }
 ```
 
-### [GET]/v2/visualizer/get_last_transactions_graph
+### [GET]/v1/visualizer/get_last_transactions_graph
 Method is used to get last user's graph
 
 **Content-Type** `application/json`
 
 ```
-https://api.tonguard.org/v2/visualizer/get_last_transactions_graph
+https://api.tonguard.org/v1/visualizer/get_last_transactions_graph
 ```
 
 **Responses**
@@ -134,11 +134,11 @@ https://api.tonguard.org/v2/visualizer/get_last_transactions_graph
 }
 ```
 
-### [PUT]/v2/visualizer/update_transactions_graph
+### [PUT]/v1/visualizer/update_transactions_graph
 Update graph's transactions
 
 ```
-https://api.tonguard.org/v2/visualizer/update_transactions_graph?address=ADDRESS&graph_id=ID
+https://api.tonguard.org/v1/visualizer/update_transactions_graph?address=ADDRESS&graph_id=ID
 ```
 
 **Request parameters (Query)**
@@ -149,17 +149,17 @@ https://api.tonguard.org/v2/visualizer/update_transactions_graph?address=ADDRESS
 | `graph_id` | integer | graph id                                                                                                           | no       |
 
 **Request body Json**
-**You have to send parameters as in response** [[GET]/v2/visualizer/get_transactions_graph](#getv2visualizerget_transactions_graph)
+**You have to send parameters as in response** [[GET]/v1/visualizer/get_transactions_graph](#getv1visualizerget_transactions_graph)
 
 **Responses**
 
 `204` **Success**
 
-### [GET]/v2/visualizer/get_visualizer_history
+### [GET]/v1/visualizer/get_visualizer_history
 Get addresses history
 
 ```
-https://api.tonguard.org/v2/visualizer/get_visualizer_history?offset=OFFSET&limit=LIMIT
+https://api.tonguard.org/v1/visualizer/get_visualizer_history?offset=OFFSET&limit=LIMIT
 ```
 
 **Request parameters (Query)**
@@ -188,11 +188,11 @@ https://api.tonguard.org/v2/visualizer/get_visualizer_history?offset=OFFSET&limi
 }
 ```
 
-### [GET]/v2/visualizer/get_transactions_graph_by_id
+### [GET]/v1/visualizer/get_transactions_graph_by_id
 Get graph by id
 
 ```
-https://api.tonguard.org/v2/visualizer/get_transactions_graph_by_id?graph_id=ID
+https://api.tonguard.org/v1/visualizer/get_transactions_graph_by_id?graph_id=ID
 ```
 
 **Request parameters (Query)**

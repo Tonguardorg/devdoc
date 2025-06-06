@@ -19,7 +19,7 @@ Probabilities are converted into risk levels, which can take one of four values:
 `User may access the risk scoring only if he has at least one available request remaining. 
 Once all requests are exhausted, access to the visualizer will be temporarily restricted until additional requests are replenished.`
 
-### [GET]/v2/reports/wallet_risk_score
+### [GET]/v1/reports/wallet_risk_score
 **Risk score, risk level and query related info**
 
 ```
@@ -29,7 +29,7 @@ token: "Bearer <jwt token>"
 
 **Example**
 ```
-https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADDRESS
+https://api.tonguard.org/v1/reports/wallet_risk_score?source=api&address=ADDRESS
 ```
 
 **Content-Type** `application/json`
@@ -165,7 +165,7 @@ https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADDRESS
 }
 ```
 
-### [POST]/v2/reports/wallet_risk_score_bulk
+### [POST]/v1/reports/wallet_risk_score_bulk
 **Get risk scores for multiple wallets in bulk**
 
 ```
@@ -233,7 +233,7 @@ token: "Bearer <jwt token>"
 }
 ```
 
-### [GET]/v2/reports/wallet_fraud_score
+### [GET]/v1/reports/wallet_fraud_score
 **Get fraud score for a wallet**
 
 ```
@@ -243,7 +243,7 @@ token: "Bearer <jwt token>"
 
 **Example**
 ```
-https://api.tonguard.org/v2/reports/wallet_fraud_score?address=ADDRESS
+https://api.tonguard.org/v1/reports/wallet_fraud_score?address=ADDRESS
 ```
 
 **Content-Type** `application/json`
@@ -295,7 +295,7 @@ https://api.tonguard.org/v2/reports/wallet_fraud_score?address=ADDRESS
 }
 ```
 
-### [POST]/v2/reports/wallet_fraud_score_bulk
+### [POST]/v1/reports/wallet_fraud_score_bulk
 **Get fraud scores for multiple wallets in bulk**
 
 ```
@@ -511,7 +511,7 @@ https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=UUID
 
 **Responses**
 
-see [Wallet Risk Score](#getv2reportswallet_risk_score)
+see [Wallet Risk Score](#getv1reportswallet_risk_score)
 
 ***
 ### [GET]/v1/reports/risk_scoring_report_{uuid}.pdf
@@ -538,12 +538,12 @@ https://api.tonguard.org/v1/reports/risk_scoring_report_UUID.pdf
 
 ***
 
-### [POST]/v2/reports/bulk_wallet_fraud_score
+### [POST]/v1/reports/bulk_wallet_fraud_score
 
 Returns address risk score, risk level and query related info for multiple addresses (bulk request). Maximum 100 address in one request. 
 
 ```
-https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
+https://api.tonguard.org/v1/reports/bulk_wallet_fraud_score?source=api
 ```
 
 **Parameters (Query)**
@@ -573,4 +573,4 @@ https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
 | `count`   | integer| Number of addresses processed                          |
 | `data`    | array  | Array of risk scores for each address in bulk request  |
 
-Each item in the `data` array contains the same fields as the response from `/v2/reports/wallet_risk_score`
+Each item in the `data` array contains the same fields as the response from `/v1/reports/wallet_risk_score`

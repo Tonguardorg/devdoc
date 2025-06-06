@@ -2,7 +2,7 @@
 
 Получение информации о топ-холдерах токенов TON.
 
-### [GET]/v2/top_holders
+### [GET]/v1/top_holders
 Получить список топ-холдеров
 
 **Parameters(Query)**
@@ -38,7 +38,7 @@
 }
 ```
 
-### [GET]/v2/top_holders/{holder_id}
+### [GET]/v1/top_holders/{holder_id}
 Получить детальную информацию о конкретном холдере
 
 **Parameters(Path)**
@@ -74,7 +74,7 @@
 }
 ```
 
-### [GET]/v2/top_holders/export
+### [GET]/v1/top_holders/export
 Экспорт списка топ-холдеров в CSV
 
 **Parameters(Query)**
@@ -95,7 +95,7 @@
 id,address,token,balance,percentage,created_dt,updated_dt
 ```
 
-### [GET]/v2/top_holders/tokens
+### [GET]/v1/top_holders/tokens
 Получить список доступных токенов
 
 **Responses**

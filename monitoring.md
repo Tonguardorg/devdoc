@@ -20,14 +20,14 @@ HTTP request header provide  with `token` in the following format:
 token: "Bearer <jwt token>"
 ```
 
-### [POST]/v2/monitoring/notify_setting
+### [POST]/v1/monitoring/notify_setting
 Set up notify, use urlencoded parameters
 
 **Content-Type** `application/json`
 
 **Example**
 ```
-https://api.tonguard.org/v2/monitoring/notify_setting?notify_url=URL&email=EMAIL
+https://api.tonguard.org/v1/monitoring/notify_setting?notify_url=URL&email=EMAIL
 ```
 
 **Query parameters**
@@ -54,13 +54,13 @@ https://api.tonguard.org/v2/monitoring/notify_setting?notify_url=URL&email=EMAIL
 
 ***
 
-### [GET]/v2/monitoring/user_rule
+### [GET]/v1/monitoring/user_rule
 Get user notify settings
 
 **Example**
 
 ```
-https://api.tonguard.org/v2/monitoring/user_rule
+https://api.tonguard.org/v1/monitoring/user_rule
 ```
 **Responses**
 
@@ -87,7 +87,7 @@ https://api.tonguard.org/v2/monitoring/user_rule
 
 ***
 
-### [POST]/v2/monitoring/user_rule
+### [POST]/v1/monitoring/user_rule
 
 Set up alerting configurations
 
@@ -95,14 +95,14 @@ Set up alerting configurations
 
 **Example**
 ```
-https://api.tonguard.org/v2/monitoring/user_rule?notify_url=URL&email=EMAIL,EMAIL1
+https://api.tonguard.org/v1/monitoring/user_rule?notify_url=URL&email=EMAIL,EMAIL1
 ```
 
 **Request body**
 
 | Parameter                      | Type    | Description                                                                                                                                                                                                                 | Required |
 |--------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
-| `monitoring_notify_setting_id` | integer | id from [POST/v2/monitoring/user_rule](#postv2monitoringnotify_setting) or [GET/v2/monitoring/user_rule](#getv2monitoringuser_rule)                                                                                         | yes      |
+| `monitoring_notify_setting_id` | integer | id from [POST/v1/monitoring/user_rule](#postv1monitoringnotify_setting) or [GET/v1/monitoring/user_rule](#getv1monitoringuser_rule)                                                                                         | yes      |
 | `monitoring_rule_info_key`     | string  | choose rule type: <br/> `rescreening`: re-screening addresses, <br/> `risk_category`: tracking increases in risk score, <br/> `risk_threshold`:tracking changes in risk categories                                          | yes      |
 | `custom_parameter`             | string  | depend on `monitoring_rule_info_key`: <br/> `rescreening`: {"interval": hours}, <br/> `risk_category`: {"risk_categories": [[risk category](../dictionary.md)]}, <br/> `risk_threshold`:{"risk_threshold": integer <=100} | yes      |
 | `rule_name_custom`             | string  | name of alert configuration                                                                                                                                                                                                 | yes      |
@@ -132,11 +132,11 @@ https://api.tonguard.org/v2/monitoring/user_rule?notify_url=URL&email=EMAIL,EMAI
 
 
 ***
-### [GET]/v2/monitoring/user_rule
+### [GET]/v1/monitoring/user_rule
 Get user rules
 
 ```
-https://api.tonguard.org/v2/monitoring/user_rule?limit=INTEGER&offset=INTEGER
+https://api.tonguard.org/v1/monitoring/user_rule?limit=INTEGER&offset=INTEGER
 ```
 
 **Parameters(Query)**
@@ -175,7 +175,7 @@ https://api.tonguard.org/v2/monitoring/user_rule?limit=INTEGER&offset=INTEGER
 
 ***
 
-### [DELETE]/v2/monitoring/user_rule
+### [DELETE]/v1/monitoring/user_rule
 Delete user rule
 
 **Content-Type** `application/json`
@@ -206,7 +206,7 @@ Delete user rule
 
 ***
 
-### [POST]/v2/monitoring/address_under_rule
+### [POST]/v1/monitoring/address_under_rule
 Attach a user rule to a wallet
 
 **Content-Type** `application/json`
@@ -239,7 +239,7 @@ Attach a user rule to a wallet
 
 ***
 
-### [DELETE]/v2/monitoring/address_under_rule
+### [DELETE]/v1/monitoring/address_under_rule
 Delete address from rule
 
 **Content-Type** `application/json`
@@ -271,11 +271,11 @@ Delete address from rule
 **Error codes** see full specification [here ](../errors.md)
 
 ***
-### [GET]/v2/monitoring/address_under_rule
+### [GET]/v1/monitoring/address_under_rule
 Get addresses under rule
 
 ```
-https://api.tonguard.org/v2/monitoring/address_under_rule?monitoring_user_rule_id=ID&limit=INTEGER&offset=INTEGER
+https://api.tonguard.org/v1/monitoring/address_under_rule?monitoring_user_rule_id=ID&limit=INTEGER&offset=INTEGER
 ```
 
 **Parameters(Query)**

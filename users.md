@@ -2,7 +2,7 @@
 
 Управление пользователями системы.
 
-### [GET]/v2/users/me
+### [GET]/v1/users/me
 Получить информацию о текущем пользователе
 
 **Responses**
@@ -29,7 +29,7 @@
 }
 ```
 
-### [PUT]/v2/users/me
+### [PUT]/v1/users/me
 Обновить информацию о текущем пользователе
 
 **Content-Type** `application/json`
@@ -78,7 +78,7 @@
 }
 ```
 
-### [PUT]/v2/users/me/password
+### [PUT]/v1/users/me/password
 Изменить пароль текущего пользователя
 
 **Content-Type** `application/json`
@@ -107,7 +107,7 @@
 {}
 ```
 
-### [GET]/v2/users/queries
+### [GET]/v1/users/queries
 Получить историю запросов текущего пользователя
 
 **Parameters(Query)**
@@ -141,7 +141,7 @@
 }
 ```
 
-### [GET]/v2/users/queries/{query_id}
+### [GET]/v1/users/queries/{query_id}
 Получить детальную информацию о конкретном запросе
 
 **Parameters(Path)**
@@ -167,7 +167,7 @@
 }
 ```
 
-### [GET]/v2/users/queries/export
+### [GET]/v1/users/queries/export
 Экспорт истории запросов в CSV
 
 **Parameters(Query)**

@@ -6,7 +6,7 @@ The Claim tool enables users to classify addresses on the TON blockchain:
 * utilization as a blacklisting tool;
 * manual marking of custodial addresses.
 
-### [POST]/v2/claims/report_wallets
+### [POST]/v1/claims/report_wallets
 Method is used to **Create wallet claim**
 
 ```
@@ -48,7 +48,7 @@ token: "Bearer <jwt token>"
 }
 ```
 
-### [PUT]/v2/claims/update_wallet_claim/{uuid}
+### [PUT]/v1/claims/update_wallet_claim/{uuid}
 Method is used to **update wallet claim**
 
 ```
@@ -70,7 +70,7 @@ token: "Bearer <jwt token>"
 
 `204` **Success**
 
-### [GET]/v2/claims/my
+### [GET]/v1/claims/my
 Method is used to obtain **list of claims**
 
 ```
@@ -80,7 +80,7 @@ token: "Bearer <jwt token>"
 
 **Example**
 ```
-https://api.tonguard.org/v2/claims/my?limit=INTEGER&offset=INTEGER&address=ADDRESS&date_from=DATE_FROM&date_to=DATE_TO&tags=INTEGER,INTEGER
+https://api.tonguard.org/v1/claims/my?limit=INTEGER&offset=INTEGER&address=ADDRESS&date_from=DATE_FROM&date_to=DATE_TO&tags=INTEGER,INTEGER
 ```
 
 **Parameters (Query)**
@@ -123,7 +123,7 @@ https://api.tonguard.org/v2/claims/my?limit=INTEGER&offset=INTEGER&address=ADDRE
 }
 ```
 
-### [DELETE]/v2/claims/delete
+### [DELETE]/v1/claims/delete
 Method is used to **delete claims**
 
 ```
@@ -143,7 +143,7 @@ token: "Bearer <jwt token>"
 
 `204` **Success**
 
-### [GET]/v2/claims/wallets_tags
+### [GET]/v1/claims/wallets_tags
 **Dictionary Wallets Tags**
 
 ```
@@ -172,7 +172,7 @@ token: "Bearer <jwt token>"
 
 Risk category dictionary - [Dictionary](dictionary)
 
-### [GET]/v2/claims/claim_history.csv
+### [GET]/v1/claims/claim_history.csv
 Method **returns claims history in a csv file**
 
 ```
