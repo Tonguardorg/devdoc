@@ -169,8 +169,16 @@ https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADDRESS
 
 Returns address risk score, risk level and query related info for multiple addresses (bulk request). Maximum 100 address in one request. 
 
+**Content-Type** `application/json`
+
+**Example**
 ```
-https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
+POST https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
+Content-Type: application/json
+[
+  "EQAU2bNfz8E-YRLZozcrLVr-JeUqZmdQWoUt01IsYaykGlWS",
+  "EQA3_TOT0UZzI43yBSfbv1KSnT9qutqbrOyGlIy4mubyRkX7"
+]
 ```
 
 **Parameters (Query)**
@@ -185,14 +193,6 @@ https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
 |-----------|--------|--------------------------------------------------------|----------|
 |           | string | TON wallet address in any base64 form (urlsafe or not) | yes      |
 
-```json
-[
-  "EQAU2bNfz8E-YRLZozcrLVr-JeUqZmdQWoUt01IsYaykGlWS",
-  "EQA3_TOT0UZzI43yBSfbv1KSnT9qutqbrOyGlIy4mubyRkX7"
-]
-
-```
-
 **Responses**
 
 | Parameter | Type   | Description                                            |
@@ -200,7 +200,16 @@ https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
 | `count`   | integer| Number of addresses processed                          |
 | `data`    | array  | Array of risk scores for each address in bulk request  |
 
-Each item in the `data` array contains the same fields as the response from `/v2/reports/wallet_risk_score`
+`200` **Success**
+
+**Content-Type** `application/json`
+
+```json
+{
+  "count": 2,
+  "data": [ ... ]
+}
+```
 
 ### [GET]/v1/reports/wallet_risk_score
 **Get risk score, risk level and query related info**
@@ -222,10 +231,6 @@ Authorization: Bearer <jwt token>
 
 **Responses**
 
-| Parameter | Type      | Description |
-|-----------|-----------|-------------|
-| ...       | ...       | ...         |
-
 `200` **Success**
 
 **Content-Type** `application/json`
@@ -239,17 +244,13 @@ Authorization: Bearer <jwt token>
 ### [GET]/v1/reports/wallet_fraud_score
 **Get fraud score for a wallet**
 
-```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
+**Content-Type** `application/json`
 
 **Example**
 ```
-https://api.tonguard.org/v1/reports/wallet_fraud_score?address=ADDRESS
+GET https://api.tonguard.org/v1/reports/wallet_fraud_score?address=ADDRESS
+Authorization: Bearer <jwt token>
 ```
-
-**Content-Type** `application/json`
 
 **Parameters (Query)**
 
@@ -268,51 +269,30 @@ https://api.tonguard.org/v1/reports/wallet_fraud_score?address=ADDRESS
   "uuid": "string",
   "version": "2.0.0",
   "address": "string",
-  "fraud_score": 0,
-  "fraud_level": "string",
-  "risk_category": [],
-  "total_days": 0,
-  "first_transaction_time": "string",
-  "last_transaction_time": "string",
-  "total_balance": 0,
-  "total_transactions_amount": 0,
-  "total_transactions_count": 0,
-  "total_counterparts_count": 0,
-  "total_sent_transactions_amount": 0,
-  "total_sent_transactions_count": 0,
-  "total_sent_counterparts_count": 0,
-  "total_received_transactions_amount": 0,
-  "total_received_transactions_count": 0,
-  "total_received_counterparts_count": 0,
-  "gambling_message_count": 0,
-  "spam_message_count": 0,
-  "scam_message_count": 0,
-  "nft_wallet_status": [],
-  "miner_wallet_status": [],
-  "bridge_wallet_status": [],
-  "exchange_wallet_status": [],
-  "stacking_wallet_status": [],
-  "risky_connections": [],
-  "source_of_funds": [],
-  "jettons_info": []
+  ...
 }
 ```
 
 ### [POST]/v1/reports/wallet_fraud_score_bulk
 **Get fraud scores for multiple wallets in bulk**
 
-```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
-
 **Content-Type** `application/json`
+
+**Example**
+```
+POST https://api.tonguard.org/v1/reports/wallet_fraud_score_bulk
+Authorization: Bearer <jwt token>
+Content-Type: application/json
+{
+  "addresses": ["ADDRESS1", "ADDRESS2"]
+}
+```
 
 **Request Body**
 
-| Parameter  | Type     | Description                                            | Required |
-|------------|----------|--------------------------------------------------------|----------|
-| `addresses` | string[] | Array of TON wallet addresses in any base64 form       | yes      |
+| Parameter   | Type     | Description                                      | Required |
+|-------------|----------|--------------------------------------------------|----------|
+| `addresses` | string[] | Array of TON wallet addresses in any base64 form  | yes      |
 
 **Responses**
 
@@ -322,57 +302,20 @@ token: "Bearer <jwt token>"
 
 ```json
 {
-  "results": [
-    {
-      "uuid": "string",
-      "version": "2.0.0",
-      "address": "string",
-      "fraud_score": 0,
-      "fraud_level": "string",
-      "risk_category": [],
-      "total_days": 0,
-      "first_transaction_time": "string",
-      "last_transaction_time": "string",
-      "total_balance": 0,
-      "total_transactions_amount": 0,
-      "total_transactions_count": 0,
-      "total_counterparts_count": 0,
-      "total_sent_transactions_amount": 0,
-      "total_sent_transactions_count": 0,
-      "total_sent_counterparts_count": 0,
-      "total_received_transactions_amount": 0,
-      "total_received_transactions_count": 0,
-      "total_received_counterparts_count": 0,
-      "gambling_message_count": 0,
-      "spam_message_count": 0,
-      "scam_message_count": 0,
-      "nft_wallet_status": [],
-      "miner_wallet_status": [],
-      "bridge_wallet_status": [],
-      "exchange_wallet_status": [],
-      "stacking_wallet_status": [],
-      "risky_connections": [],
-      "source_of_funds": [],
-      "jettons_info": []
-    }
-  ]
+  "results": [ ... ]
 }
 ```
 
 ### [GET]/v1/reports/risk_scoring_history
 **Returns risk scoring history for a specific user and address**
 
-```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
+**Content-Type** `application/json`
 
 **Example**
 ```
-https://api.tonguard.org/v1/reports/risk_scoring_history?address=ADDRESS&limit=INTEGER&offset=INTEGER&risk_limit=INTEGER&risk_offset=INTEGER&info_category=INTEGER&risk_category=INTEGER&risk=high%2Cmedium&source=api&date_from=DATE_FROM&date_to=DATE_TO
+GET https://api.tonguard.org/v1/reports/risk_scoring_history?address=ADDRESS&limit=10
+Authorization: Bearer <jwt token>
 ```
-
-**Content-Type** `application/json`
 
 **Parameters (Query)**
 
@@ -398,113 +341,49 @@ https://api.tonguard.org/v1/reports/risk_scoring_history?address=ADDRESS&limit=I
 
 ```json
 {
-  "results": [
-    {
-      "uuid": "string",
-      "version": "2.0.0",
-      "created_dt": "string",
-      "endpoint_used": "string",
-      "source": "string",
-      "whitelist": false,
-      "blacklist": false,
-      "address": "string",
-      "address_raw": "string",
-      "address_non_bounceable": "string",
-      "address_type": "string",
-      "owner": "string",
-      "risk_score": 0,
-      "risky_connections": [],
-      "info_category": [],
-      "fraud_level": "string",
-      "risk_category": [],
-      "total_days": 0,
-      "first_transaction_time": "string",
-      "last_transaction_time": "string",
-      "total_balance": 0,
-      "total_transactions_amount": 0,
-      "total_transactions_count": 0,
-      "total_counterparts_count": 0,
-      "total_sent_transactions_amount": 0,
-      "total_sent_transactions_count": 0,
-      "total_sent_counterparts_count": 0,
-      "total_received_transactions_amount": 0,
-      "total_received_transactions_count": 0,
-      "total_received_counterparts_count": 0,
-      "gambling_message_count": 0,
-      "spam_message_count": 0,
-      "scam_message_count": 0,
-      "bridge_wallet_status": [],
-      "exchange_wallet_status": [],
-      "stacking_wallet_status": [],
-      "miner_wallet_status": [],
-      "nft_wallet_status": [],
-      "total_jetton_transactions_amount": 0,
-      "jetton_balance": 0,
-      "total_balance_in_usd": 0,
-      "total_transactions_amount_in_usd": 0,
-      "total_received_transactions_amount_in_usd": 0,
-      "total_sent_transactions_amount_in_usd": 0,
-      "risky_connections": [],
-      "source_of_funds": [],
-      "jettons_info": []
-    }
-  ]
+  "results": [ ... ]
 }
 ```
 
-**Error codes** see full specification [here](../errors.md)
-
-***
-
 ### [GET]/v1/reports/risk_history.csv
-
 **Returns risk scoring history in a csv file**
 
-```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
-**Example**
-```
-https://api.tonguard.org/v1/reports/risk_history.csv?address=ADDRESS
-&risk_limit=INTEGER&risk_offset=INTEGER&info_category=INTEGERrisk_category=INTEGER&risk=RISK_LEVEL1,RISK_LEVEL2&source=SOURCE
-&date_from=DATE_FROM&date_to=DATE_TO
-```
 **Content-Type** `application/json`
 
-**Parameters(Query)**
+**Example**
+```
+GET https://api.tonguard.org/v1/reports/risk_history.csv?address=ADDRESS&date_from=2024-01-01&date_to=2024-01-31
+Authorization: Bearer <jwt token>
+```
+
+**Parameters (Query)**
 
 | Parameter       | Type    | Description                                            | Required |
 |-----------------|---------|--------------------------------------------------------|----------|
 | `address`       | string  | TON wallet address in any base64 form (urlsafe or not) | no       |
 | `risk_limit`    | integer | send risk level to filter                              | no       |
-| `risk_offset `  | integer | offset of risk for filter                              | no       |          
-| `info_category` | string  | list of info tags for filter.                          | no       |         
-| `risk_category` | string  | list of risk tags for filter.                          | no       |          
-| `risk`          | string  | list of risk levels for filter.                        | no       |          
-| `source`        | string  | source of the request                                  | no       |          
-| `date_from`     | string  | date from for filter, "DD.MM.YYYY" format              | no       |          
-| `date_to`       | string  | date to for filter, "DD.MM.YYYY" format                | no       |          
+| `risk_offset `  | integer | offset of risk for filter                              | no       |
+| `info_category` | string  | list of info tags for filter.                          | no       |
+| `risk_category` | string  | list of risk tags for filter.                          | no       |
+| `risk`          | string  | list of risk levels for filter.                        | no       |
+| `source`        | string  | source of the request                                  | no       |
+| `date_from`     | string  | date from for filter, "DD.MM.YYYY" format              | no       |
+| `date_to`       | string  | date to for filter, "DD.MM.YYYY" format                | no       |
 
 **Responses**
 
 `200` **Risk scoring history successfully retrieved**
 
-***
-
 ### [GET]/v1/reports/risk_scoring_report
-
 **Return risk scoring report for a specific uuid**
 
-```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
+**Content-Type** `application/json`
+
 **Example**
 ```
-https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=UUID
+GET https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=UUID
+Authorization: Bearer <jwt token>
 ```
-**Content-Type** `application/json`
 
 **Parameters (Query)**
 
@@ -514,21 +393,18 @@ https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=UUID
 
 **Responses**
 
-see [Wallet Risk Score](#getv2reportswallet_risk_score)
+`200` **Success**
 
-***
 ### [GET]/v1/reports/risk_scoring_report_{uuid}.pdf
-
 **Download risk scoring report as a pdf-file**
 
-```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
-```
-https://api.tonguard.org/v1/reports/risk_scoring_report_UUID.pdf
-```
 **Content-Type** `application/json`
+
+**Example**
+```
+GET https://api.tonguard.org/v1/reports/risk_scoring_report_UUID.pdf?uuid=UUID
+Authorization: Bearer <jwt token>
+```
 
 **Parameters (Query)**
 
@@ -537,6 +413,5 @@ https://api.tonguard.org/v1/reports/risk_scoring_report_UUID.pdf
 | `uuid`    | string | id of risk scoring report | yes      |
 
 **Responses**
-`200` **Data successfully downloaded**
 
-***
+`200` **Data successfully downloaded**
