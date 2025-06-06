@@ -92,7 +92,3 @@ This API uses HTTP status codes to communicate with the API consumer:
 - [POST] `/v2/reset-password/email` - Reset email
 - [POST] `/v2/reset-password/check-token` - Check token
 - [POST] `/v2/reset-password/change-password` - Change password
-
-### Metrics
-
-- [GET] `/metrics` - Get metrics

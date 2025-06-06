@@ -114,14 +114,26 @@ the API usage rules. Instead, store the token securely and reuse it for all requ
 
 **Request Body**
 
-| Parameter         | Type   | Description                | Required |
-|-------------------|--------|----------------------------|----------|
-| `email`           | string | User email                 | yes      |
+| Parameter         | Type   | Description                 | Required |
+|-------------------|--------|-----------------------------|----------|
+| `email`           | string | User email                  | yes      |
 | `recaptcha_token` | string | reCAPTCHA verification token| yes      |
+
+**Example**
+```
+POST https://api.tonguard.org/v2/reset-password/email
+Content-Type: application/json
+{
+  "email": "user@example.com",
+  "recaptcha_token": "token"
+}
+```
 
 **Responses**
 
 `200` **Success**
+
+---
 
 ### [POST]/v2/reset-password/check-token
 **Check if reset token is valid**
@@ -130,13 +142,28 @@ the API usage rules. Instead, store the token securely and reuse it for all requ
 
 **Request Body**
 
-| Parameter | Type   | Description                | Required |
-|-----------|--------|----------------------------|----------|
-| `token`   | string | Reset token from email     | yes      |
+| Parameter | Type   | Description            | Required |
+|-----------|--------|------------------------|----------|
+| `token`   | string | Reset token from email | yes      |
+
+**Example**
+```
+POST https://api.tonguard.org/v2/reset-password/check-token
+Content-Type: application/json
+{
+  "token": "reset-token"
+}
+```
 
 **Responses**
 
+| Parameter | Type    | Description           |
+|-----------|---------|-----------------------|
+| `valid`   | boolean | Whether token is valid|
+
 `200` **Success**
+
+---
 
 ### [POST]/v2/reset-password/change-password
 **Change password using reset token**
@@ -145,11 +172,25 @@ the API usage rules. Instead, store the token securely and reuse it for all requ
 
 **Request Body**
 
-| Parameter    | Type   | Description                | Required |
-|--------------|--------|----------------------------|----------|
-| `token`      | string | Reset token from email     | yes      |
-| `password`   | string | New password               | yes      |
+| Parameter  | Type   | Description            | Required |
+|------------|--------|------------------------|----------|
+| `token`    | string | Reset token from email | yes      |
+| `password` | string | New password           | yes      |
+
+**Example**
+```
+POST https://api.tonguard.org/v2/reset-password/change-password
+Content-Type: application/json
+{
+  "token": "reset-token",
+  "password": "new-password"
+}
+```
 
 **Responses**
+
+| Parameter | Type    | Description                 |
+|-----------|---------|-----------------------------|
+| `success` | boolean | Whether password was changed|
 
 `200` **Success**

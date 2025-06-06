@@ -235,11 +235,7 @@ Authorization: Bearer <jwt token>
 
 **Content-Type** `application/json`
 
-```json
-{
-  ...
-}
-```
+
 
 ### [GET]/v1/reports/wallet_fraud_score
 **Get fraud score for a wallet**
