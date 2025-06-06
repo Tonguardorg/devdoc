@@ -1,11 +1,11 @@
-## Whitelist
-
-Управление белым списком адресов TON.
+# Whitelist Management
+Management of TON addresses whitelist.
 
 ### [GET]/v1/whitelists/whitelist
-Получить белый список
+Get whitelist
 
-**Example**
+**Content-Type** `application/json`
+
 ```
 https://api.tonguard.org/v1/whitelists/whitelist
 ```
@@ -30,67 +30,35 @@ https://api.tonguard.org/v1/whitelists/whitelist
 ```
 
 ### [DELETE]/v1/whitelists/whitelist_entity
-Удалить адрес из белого списка
+Delete address from whitelist
 
 **Content-Type** `application/json`
 
-**Request body**
-
-| Parameter  | Type   | Description          | Required |
-|------------|--------|----------------------|----------|
-| `address`  | string | TON адрес кошелька   | yes      |
-
-```json
-{
-  "address": "string"
-}
 ```
+https://api.tonguard.org/v1/whitelists/whitelist_entity
+```
+
+**Request parameters (Query)**
+
+| Parameter | Type   | Description                | Required |
+|-----------|--------|----------------------------|----------|
+| `address` | string | TON wallet address        | yes      |
 
 **Responses**
 
 `204` **Success**
 
 ### [GET]/v1/whitelists/whitelist.csv
-Скачать белый список в формате CSV
+Download whitelist as CSV
+
+**Content-Type** `application/json`
+
+```
+https://api.tonguard.org/v1/whitelists/whitelist.csv
+```
 
 **Responses**
 
 `200` **Success**
 
 **Content-Type** `text/csv`
-
-```
-id,address,created_dt
-```
-
-### [POST]/v1/whitelists/whitelist.csv
-Загрузить данные белого списка
-
-**Content-Type** `multipart/form-data`
-
-**Request body**
-
-| Parameter | Type   | Description          | Required |
-|-----------|--------|----------------------|----------|
-| `file`    | file   | CSV файл с адресами  | yes      |
-
-**Responses**
-
-`201` **Success**
-
-**Content-Type** `application/json`
-
-```json
-{
-  "count": 0,
-  "results": [
-    {
-      "id": 0,
-      "address": "string",
-      "created_dt": "string"
-    }
-  ]
-}
-```
-
-**Error codes** see full specification [here](../errors.md)

@@ -16,14 +16,14 @@ Below is an example request for obtaining a token:
 | Parameter  | Type   | Description | Required |
 |------------|--------|-------------|----------|
 | `username` | string | email       | yes      |
-| `password` | string | password    | no       |
+| `password` | string | password    | yes      |
 
 **Request**
 
 ```json
 {
-  "username": "johnsmith@tonguard.org",
-  "password": "ToNloveR2000"
+  "username": "username",
+  "password": "password"
 }
 ```
 
@@ -63,7 +63,7 @@ OAuth2 compatible token endpoint. Use for Swagger UI login form and SDK authenti
 
 | Parameter      | Type   | Description                | Required |
 |----------------|--------|----------------------------|----------|
-| `grant_type`   | string | Must be "password"         | yes      |
+| `grant_type`   | string | Must be "password"         | no      |
 | `username`     | string | User email                 | yes      |
 | `password`     | string | User password              | yes      |
 | `scope`        | string | OAuth2 scope               | no       |

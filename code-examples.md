@@ -1,8 +1,8 @@
-# Примеры кода для API Tonguard
+# API Tonguard Code Examples
 
-## Аутентификация
+## Authentication
 
-### Получение JWT токена
+### Getting a JWT Token
 
 ```python
 import requests
@@ -34,7 +34,7 @@ async function getAuthToken(email, password) {
 }
 ```
 
-## Получение оценки риска кошелька
+## Getting Wallet Risk Score
 
 ### Python
 
@@ -69,9 +69,9 @@ async function getWalletRiskScore(walletAddress, token) {
 }
 ```
 
-## Мониторинг кошельков
+## Wallet Monitoring
 
-### Добавление кошелька в мониторинг
+### Adding a Wallet to Monitoring
 
 ```python
 import requests
@@ -109,9 +109,9 @@ async function addWalletToMonitoring(walletAddress, ruleId, token) {
 }
 ```
 
-## Визуализация транзакций
+## Visualizing Transactions
 
-### Получение графа транзакций
+### Getting Transactions Graph
 
 ```python
 import requests
@@ -144,7 +144,7 @@ async function getTransactionsGraph(walletAddress, token) {
 }
 ```
 
-## Обработка ошибок
+## Error Handling
 
 ### Python
 
@@ -159,11 +159,11 @@ def handle_api_request(url, method="GET", headers=None, params=None, json=None):
         return response.json()
     except RequestException as e:
         if response.status_code == 401:
-            raise Exception("Ошибка аутентификации. Проверьте ваш токен.")
+            raise Exception("Authentication error. Please check your token.")
         elif response.status_code == 404:
-            raise Exception("Ресурс не найден.")
+            raise Exception("Resource not found.")
         else:
-            raise Exception(f"Произошла ошибка: {str(e)}")
+            raise Exception(f"An error occurred: {str(e)}")
 ```
 
 ### JavaScript
@@ -174,15 +174,15 @@ async function handleApiRequest(url, options = {}) {
         const response = await fetch(url, options);
         if (!response.ok) {
             if (response.status === 401) {
-                throw new Error('Ошибка аутентификации. Проверьте ваш токен.');
+                throw new Error('Authentication error. Please check your token.');
             } else if (response.status === 404) {
-                throw new Error('Ресурс не найден.');
+                throw new Error('Resource not found.');
             }
-            throw new Error(`HTTP ошибка! статус: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         return await response.json();
     } catch (error) {
-        console.error('Ошибка при выполнении запроса:', error);
+        console.error('Error occurred during API request:', error);
         throw error;
     }
 }

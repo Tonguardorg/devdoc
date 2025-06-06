@@ -1,19 +1,22 @@
-## Top Holders
-
-Получение информации о топ-холдерах токенов TON.
+# Top Holders
+Get information about top token holders in TON.
 
 ### [GET]/v1/top_holders
-Получить список топ-холдеров
+Get list of top holders
 
-**Parameters(Query)**
+**Content-Type** `application/json`
 
-| Parameter  | Type    | Description                                     | Required |
-|------------|---------|-------------------------------------------------|----------|
-| `limit`    | string  | limit of records to return, default: 10         | no       |
-| `offset`   | integer | offset of records to return, Default value is 0 | no       |
-| `token`    | string  | Адрес токена                                    | no       |
-| `date_from`| string  | Дата начала периода (YYYY-MM-DD)                | no       |
-| `date_to`  | string  | Дата конца периода (YYYY-MM-DD)                 | no       |
+```
+https://api.tonguard.org/v1/top_holders
+```
+
+**Request parameters (Query)**
+
+| Parameter  | Type    | Description                                    | Required |
+|------------|---------|------------------------------------------------|----------|
+| `token`    | string  | Token address                                  | no       |
+| `date_from`| string  | Start date of the period (YYYY-MM-DD)          | no       |
+| `date_to`  | string  | End date of the period (YYYY-MM-DD)            | no       |
 
 **Responses**
 
@@ -28,24 +31,27 @@
     {
       "id": 0,
       "address": "string",
-      "token": "string",
-      "balance": "string",
-      "percentage": 0,
-      "created_dt": "string",
-      "updated_dt": "string"
+      "balance": 0,
+      "created_dt": "string"
     }
   ]
 }
 ```
 
 ### [GET]/v1/top_holders/{holder_id}
-Получить детальную информацию о конкретном холдере
+Get detailed information about specific holder
 
-**Parameters(Path)**
+**Content-Type** `application/json`
 
-| Parameter  | Type    | Description     | Required |
-|------------|---------|-----------------|----------|
-| `holder_id`| integer | ID холдера      | yes      |
+```
+https://api.tonguard.org/v1/top_holders/{holder_id}
+```
+
+**Request parameters (Path)**
+
+| Parameter  | Type    | Description | Required |
+|------------|---------|-------------|----------|
+| `holder_id`| integer | Holder ID   | yes      |
 
 **Responses**
 
@@ -57,33 +63,19 @@
 {
   "id": 0,
   "address": "string",
-  "token": "string",
-  "balance": "string",
-  "percentage": 0,
-  "created_dt": "string",
-  "updated_dt": "string",
-  "transactions": [
-    {
-      "id": 0,
-      "hash": "string",
-      "type": "string",
-      "amount": "string",
-      "created_dt": "string"
-    }
-  ]
+  "balance": 0,
+  "created_dt": "string"
 }
 ```
 
 ### [GET]/v1/top_holders/export
-Экспорт списка топ-холдеров в CSV
+Export list of top holders as CSV
 
-**Parameters(Query)**
+**Content-Type** `application/json`
 
-| Parameter  | Type    | Description                     | Required |
-|------------|---------|---------------------------------|----------|
-| `token`    | string  | Адрес токена                    | no       |
-| `date_from`| string  | Дата начала периода (YYYY-MM-DD)| no       |
-| `date_to`  | string  | Дата конца периода (YYYY-MM-DD) | no       |
+```
+https://api.tonguard.org/v1/top_holders/export
+```
 
 **Responses**
 
@@ -91,12 +83,14 @@
 
 **Content-Type** `text/csv`
 
-```
-id,address,token,balance,percentage,created_dt,updated_dt
-```
-
 ### [GET]/v1/top_holders/tokens
-Получить список доступных токенов
+Get list of available tokens
+
+**Content-Type** `application/json`
+
+```
+https://api.tonguard.org/v1/top_holders/tokens
+```
 
 **Responses**
 
@@ -109,10 +103,10 @@ id,address,token,balance,percentage,created_dt,updated_dt
   "count": 0,
   "results": [
     {
+      "id": 0,
       "address": "string",
       "name": "string",
-      "symbol": "string",
-      "decimals": 0
+      "symbol": "string"
     }
   ]
 }
