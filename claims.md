@@ -9,12 +9,19 @@ The Claim tool enables users to classify addresses on the TON blockchain:
 ### [POST]/v1/claims/report_wallets
 Method is used to **Create wallet claim**
 
-```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
-```
-
 **Content-Type** `application/json`
+
+**Example**
+```
+POST https://api.tonguard.org/v1/claims/report_wallets
+Content-Type: application/json
+{
+  "wallet_address": "EQBhhJXZI8NVeJSTXhOQPbheJknVRaCqOQu9gHroK0Uu1Knw",
+  "tags": [1,2],
+  "comment": "Suspicious activity",
+  "transaction_link": "https://tonviewer.com/transaction/123"
+}
+```
 
 **Request body JSON**
 
@@ -24,15 +31,6 @@ token: "Bearer <jwt token>"
 | `tags`             | integer[] | array of high category tags, [risk category](../dictionary.md)                                      | yes      |
 | `comment`          | string    | comment                                                                                              | no       |
 | `transaction_link` | string    | link to transaction in https://tonviewer.com/,https://tonscan.org/,https://tonwhales.com/ru/explorer | no       |
-
-```json
-{
-  "wallet_address": "string",
-  "tags": [tagID1,tagID2],
-  "comment": "string",
-  "transaction_link": "string"
-}
-```
 
 **Responses**
 

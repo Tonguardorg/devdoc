@@ -6,8 +6,10 @@ Get list of top holders
 
 **Content-Type** `application/json`
 
+**Example**
 ```
-https://api.tonguard.org/v1/top_holders
+GET https://api.tonguard.org/v1/top_holders?token=TOKEN&date_from=2024-01-01&date_to=2024-01-31
+Authorization: Bearer <jwt token>
 ```
 
 **Request parameters (Query)**

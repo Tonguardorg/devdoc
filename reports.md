@@ -202,6 +202,40 @@ https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
 
 Each item in the `data` array contains the same fields as the response from `/v2/reports/wallet_risk_score`
 
+### [GET]/v1/reports/wallet_risk_score
+**Get risk score, risk level and query related info**
+
+**Content-Type** `application/json`
+
+**Example**
+```
+GET https://api.tonguard.org/v1/reports/wallet_risk_score?source=api&address=ADDRESS
+Authorization: Bearer <jwt token>
+```
+
+**Parameters (Query)**
+
+| Parameter | Type   | Description                                            | Required             |
+|-----------|--------|--------------------------------------------------------|----------------------|
+| `address` | string | TON wallet address in any base64 form (urlsafe or not) | yes                  |
+| `source`  | string | source of the request<br/>options: api, manual         | no <br/>default: api |
+
+**Responses**
+
+| Parameter | Type      | Description |
+|-----------|-----------|-------------|
+| ...       | ...       | ...         |
+
+`200` **Success**
+
+**Content-Type** `application/json`
+
+```json
+{
+  ...
+}
+```
+
 ### [GET]/v1/reports/wallet_fraud_score
 **Get fraud score for a wallet**
 

@@ -17,8 +17,10 @@ Method is used to create graph
 
 **Content-Type** `application/json`
 
+**Example**
 ```
-https://api.tonguard.org/v1/visualizer/get_transactions_graph?address=ADDRESS&limit=INTEGER&action=ACTION&risk=RISK&date_from=DATE_FROM&date_to=DATE_TO
+GET https://api.tonguard.org/v1/visualizer/get_transactions_graph?address=ADDRESS&limit=10
+Authorization: Bearer <jwt token>
 ```
 
 **Request parameters (Query)**
