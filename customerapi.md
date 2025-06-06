@@ -58,3 +58,11 @@ If you have any questions, feel free to reach out to us:
 - **Telegram Bot:** [@tonguard_bot](https://t.me/tonguard_bot)  
 
 Our team is always here to assist you!
+
+---
+
+### Documentation Updates
+
+- 2024-12-10: Updated documentation
+- 2025-05-07: Added Source of Funds and Token Analysis
+- 2025-06-06: Updated documentation in general
