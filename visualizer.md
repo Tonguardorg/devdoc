@@ -188,18 +188,18 @@ https://api.tonguard.org/v1/visualizer/get_visualizer_history?offset=OFFSET&limi
 }
 ```
 
-### [GET]/v1/visualizer/get_transactions_graph_by_id
-Get graph by id
+### [GET]/v1/visualizer/get_transactions_graph_by_uuid
+Get graph by UUID
 
 ```
-https://api.tonguard.org/v1/visualizer/get_transactions_graph_by_id?graph_id=ID
+https://api.tonguard.org/v1/visualizer/get_transactions_graph_by_uuid?uuid=UUID
 ```
 
 **Request parameters (Query)**
 
-| Parameter  | Type    | Description | Required |
-|------------|---------|-------------|----------|
-| `graph_id` | integer | graph id    | yes      |
+| Parameter | Type   | Description | Required |
+|-----------|--------|-------------|----------|
+| `uuid`    | string | graph UUID  | yes      |
 
 **Responses**
 

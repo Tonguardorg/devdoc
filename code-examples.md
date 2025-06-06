@@ -42,7 +42,7 @@ async function getAuthToken(email, password) {
 import requests
 
 def get_wallet_risk_score(wallet_address, token):
-    url = "https://api.tonguard.org/v1/reports/wallet_risk_score"
+    url = "https://api.tonguard.org/v2/reports/wallet_risk_score"
     headers = {
         "Authorization": f"Bearer {token}"
     }
@@ -58,7 +58,7 @@ def get_wallet_risk_score(wallet_address, token):
 ```javascript
 async function getWalletRiskScore(walletAddress, token) {
     const response = await fetch(
-        `https://api.tonguard.org/v1/reports/wallet_risk_score?wallet_address=${walletAddress}`,
+        `https://api.tonguard.org/v2/reports/wallet_risk_score?wallet_address=${walletAddress}`,
         {
             headers: {
                 'Authorization': `Bearer ${token}`

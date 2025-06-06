@@ -19,7 +19,7 @@ Probabilities are converted into risk levels, which can take one of four values:
 `User may access the risk scoring only if he has at least one available request remaining. 
 Once all requests are exhausted, access to the visualizer will be temporarily restricted until additional requests are replenished.`
 
-### [GET]/v1/reports/wallet_risk_score
+### [GET]/v2/reports/wallet_risk_score
 **Risk score, risk level and query related info**
 
 ```
@@ -29,7 +29,7 @@ token: "Bearer <jwt token>"
 
 **Example**
 ```
-https://api.tonguard.org/v1/reports/wallet_risk_score?source=api&address=ADDRESS
+https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADDRESS
 ```
 
 **Content-Type** `application/json`
@@ -165,73 +165,42 @@ https://api.tonguard.org/v1/reports/wallet_risk_score?source=api&address=ADDRESS
 }
 ```
 
-### [POST]/v1/reports/wallet_risk_score_bulk
-**Get risk scores for multiple wallets in bulk**
+### [POST]/v2/reports/bulk_wallet_fraud_score
+
+Returns address risk score, risk level and query related info for multiple addresses (bulk request). Maximum 100 address in one request. 
 
 ```
-HTTP request header provide  with `token` in the following format:
-token: "Bearer <jwt token>"
+https://api.tonguard.org/v2/reports/bulk_wallet_fraud_score?source=api
 ```
 
-**Content-Type** `application/json`
+**Parameters (Query)**
 
-**Request Body**
+| Parameter | Type   | Description              | Required |
+|-----------|--------|--------------------------|----------|
+| `source`  | string | api/manual, default: api | no       |
 
-| Parameter | Type     | Description                                            | Required |
-|-----------|----------|--------------------------------------------------------|----------|
-| `addresses` | string[] | Array of TON wallet addresses in any base64 form       | yes      |
-| `source`    | string   | Source of the request<br/>options: api, manual         | no       |
+**Request body**
+
+| Parameter | Type   | Description                                            | Required |
+|-----------|--------|--------------------------------------------------------|----------|
+|           | string | TON wallet address in any base64 form (urlsafe or not) | yes      |
+
+```json
+[
+  "EQAU2bNfz8E-YRLZozcrLVr-JeUqZmdQWoUt01IsYaykGlWS",
+  "EQA3_TOT0UZzI43yBSfbv1KSnT9qutqbrOyGlIy4mubyRkX7"
+]
+
+```
 
 **Responses**
 
-`200` **Success**
+| Parameter | Type   | Description                                            |
+|-----------|--------|--------------------------------------------------------|
+| `count`   | integer| Number of addresses processed                          |
+| `data`    | array  | Array of risk scores for each address in bulk request  |
 
-**Content-Type** `application/json`
-
-```json
-{
-  "results": [
-    {
-      "uuid": "string",
-      "version": "2.0.0",
-      "whitelist": false,
-      "blacklist": false,
-      "address": "string",
-      "address_type": "string",
-      "address_raw": "string",
-      "address_non_bounceable": "string",
-      "owner": "string",
-      "fraud_level": "string",
-      "risk_score": 0,
-      "risk_category": [],
-      "total_days": 0,
-      "first_transaction_time": "string",
-      "last_transaction_time": "string",
-      "total_balance": 0,
-      "total_transactions_amount": 0,
-      "total_transactions_count": 0,
-      "total_counterparts_count": 0,
-      "total_sent_transactions_amount": 0,
-      "total_sent_transactions_count": 0,
-      "total_sent_counterparts_count": 0,
-      "total_received_transactions_amount": 0,
-      "total_received_transactions_count": 0,
-      "total_received_counterparts_count": 0,
-      "gambling_message_count": 0,
-      "spam_message_count": 0,
-      "scam_message_count": 0,
-      "nft_wallet_status": [],
-      "miner_wallet_status": [],
-      "bridge_wallet_status": [],
-      "exchange_wallet_status": [],
-      "stacking_wallet_status": [],
-      "risky_connections": [],
-      "source_of_funds": [],
-      "jettons_info": []
-    }
-  ]
-}
-```
+Each item in the `data` array contains the same fields as the response from `/v2/reports/wallet_risk_score`
 
 ### [GET]/v1/reports/wallet_fraud_score
 **Get fraud score for a wallet**
@@ -511,7 +480,7 @@ https://api.tonguard.org/v1/reports/risk_scoring_report?uuid=UUID
 
 **Responses**
 
-see [Wallet Risk Score](#getv1reportswallet_risk_score)
+see [Wallet Risk Score](#getv2reportswallet_risk_score)
 
 ***
 ### [GET]/v1/reports/risk_scoring_report_{uuid}.pdf
@@ -537,40 +506,3 @@ https://api.tonguard.org/v1/reports/risk_scoring_report_UUID.pdf
 `200` **Data successfully downloaded**
 
 ***
-
-### [POST]/v1/reports/bulk_wallet_fraud_score
-
-Returns address risk score, risk level and query related info for multiple addresses (bulk request). Maximum 100 address in one request. 
-
-```
-https://api.tonguard.org/v1/reports/bulk_wallet_fraud_score?source=api
-```
-
-**Parameters (Query)**
-
-| Parameter | Type   | Description              | Required |
-|-----------|--------|--------------------------|----------|
-| `source`  | string | api/manual, default: api | no       |
-
-**Request body**
-
-| Parameter | Type   | Description                                            | Required |
-|-----------|--------|--------------------------------------------------------|----------|
-|           | string | TON wallet address in any base64 form (urlsafe or not) | yes      |
-
-```json
-[
-  "EQAU2bNfz8E-YRLZozcrLVr-JeUqZmdQWoUt01IsYaykGlWS",
-  "EQA3_TOT0UZzI43yBSfbv1KSnT9qutqbrOyGlIy4mubyRkX7"
-]
-
-```
-
-**Responses**
-
-| Parameter | Type   | Description                                            |
-|-----------|--------|--------------------------------------------------------|
-| `count`   | integer| Number of addresses processed                          |
-| `data`    | array  | Array of risk scores for each address in bulk request  |
-
-Each item in the `data` array contains the same fields as the response from `/v1/reports/wallet_risk_score`
