@@ -54,7 +54,7 @@ among all users. Exceeding these limits may result in temporary rate limiting or
 
 ### Contacts
 If you have any questions, feel free to reach out to us:  
-- **Email:** [info@tonguard.com](mailto:info@tonguard.com)  
+- **Email:** [info@tonguard.org](mailto:info@tonguard.org)  
 - **Telegram Bot:** [@tonguard_bot](https://t.me/tonguard_bot)  
 
 Our team is always here to assist you!
