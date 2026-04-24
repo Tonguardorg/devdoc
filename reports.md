@@ -87,6 +87,7 @@ https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADDRESS
 | `total_sent_transactions_amount_in_usd`     | number    | USDT jettons sent balance recalculated to USD **at the current rate**                                                                                                                                                    |
 | `risky_connections`                         | array     | Array of risky connections with other addresses. Each connection contains:<br/>- `last_transaction_time`: string<br/>- `wallet_address`: string<br/>- `neighbor_wallet_address`: string<br/>- `total_income`: integer<br/>- `total_outcome`: integer<br/>- `risk_score`: integer<br/>- `fraud_level`: string<br/>- `total_transactions_count`: integer<br/>- `total_transactions_amount`: string<br/>- `tags`: array |
 | `source_of_funds`                           | array     | Array of fund sources. Each source contains:<br/>- `category`: string<br/>- `percentage`: number<br/>- `total_input_ton`: number<br/>- `total_input_usdt`: number |
+| `distribution_by_tag`                       | array     | Array of tag distribution. Each distribution contains:<br/>- `category`: string<br/>- `proportion`: number |
 | `jettons_info`                              | array     | Array of jetton information. Each jetton contains:<br/>- `jetton_address`: string<br/>- `name`: string<br/>- `symbol`: string<br/>- `description`: string<br/>- `balance`: number<br/>- `balance_in_ton`: number<br/>- `balance_in_usd`: number<br/>- `turnover`: number<br/>- `turnover_in_ton`: number<br/>- `turnover_in_usd`: number<br/>- `transactions_count`: integer<br/>- `counterparts_count`: integer<br/>- `received_counterparts_count`: integer<br/>- `sent_counterparts_count`: integer<br/>- `received_transactions_count`: integer<br/>- `sent_transactions_count`: integer<br/>- `first_transaction_time`: string<br/>- `last_transaction_time`: string |
 
 
@@ -161,6 +162,16 @@ https://api.tonguard.org/v2/reports/wallet_risk_score?source=api&address=ADDRESS
     }
   ],
   "source_of_funds": [],
+  "distribution_by_tag": [
+    {
+      "category": "Dark Market",
+      "proportion": 75.5
+    },
+    {
+      "category": "Scam",
+      "proportion": 24.5
+    }
+  ],
   "jettons_info": []
 }
 ```
